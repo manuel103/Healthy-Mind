@@ -1,0 +1,8 @@
+none
+mild
+moderate
+moderately severe
+severe
+extremely severe
+normal
+stressed

@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "163619020443",
+    "firebase_url": "https://dl4ddoa.firebaseio.com",
+    "project_id": "dl4ddoa",
+    "storage_bucket": "dl4ddoa.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:163619020443:android:1d8892779371a4da8db03e",
+        "android_client_info": {
+          "package_name": "com.example.dl4ddoa"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "163619020443-pa1itl03d6v9asrbevpdfi7hrbf5nf3t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBxhyUsVCMb6H_TKzY0PiD9eK2egs0I0gQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "163619020443-pa1itl03d6v9asrbevpdfi7hrbf5nf3t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:163619020443:android:f993151440591d338db03e",
+        "android_client_info": {
+          "package_name": "com.example.healthymind"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "163619020443-pa1itl03d6v9asrbevpdfi7hrbf5nf3t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBxhyUsVCMb6H_TKzY0PiD9eK2egs0I0gQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "163619020443-pa1itl03d6v9asrbevpdfi7hrbf5nf3t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
