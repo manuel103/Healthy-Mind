@@ -13,6 +13,8 @@
     <color name="yellow">#F8BA0F</color>
     <color name="grey">#E9EAEE</color>
     <color name="lightgrey">#EEEEEE</color>
+    <color name="colorLoginPrimaryDark">#FDFFFF</color>
+    <color name="blackTextColor">#000</color>
     <!--colors for light mode-->
 
 <!--Home Cards-->

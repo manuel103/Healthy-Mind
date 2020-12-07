@@ -2,9 +2,11 @@ package com.example.healthymind.auth;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.example.healthymind.R;
 import com.google.android.material.textfield.TextInputLayout;
@@ -14,24 +16,24 @@ import com.google.firebase.database.FirebaseDatabase;
 public class SignupActivity extends AppCompatActivity {
 
     TextInputLayout regName, regUsername, regEmail, regPhone, regPassword;
-    Button regBtn, regToLoginBtn;
-
+    Button regBtn;
+    TextView callLogin;
     FirebaseDatabase rootNode;
     DatabaseReference reference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_signup);
+        setContentView(R.layout.activity_register2);
 
         // XML hooks
         regName = findViewById(R.id.name);
+        callLogin = findViewById(R.id.backToLogin);
         regUsername = findViewById(R.id.username);
         regEmail = findViewById(R.id.email);
         regPhone = findViewById(R.id.phoneNo);
         regPassword = findViewById(R.id.password);
         regBtn = findViewById(R.id.sign_up);
-        regToLoginBtn = findViewById(R.id.reg_login_btn);
 
 
         // save data on button click
@@ -52,6 +54,15 @@ public class SignupActivity extends AppCompatActivity {
 
                 UserHelper helper = new UserHelper(name, username, email, phoneNo, password);
                 reference.child(username).setValue(helper);
+            }
+        });
+
+        callLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
+                startActivity(intent);
             }
         });
     }

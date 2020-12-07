@@ -42,9 +42,9 @@ import java.util.List;
 
 public class LoginActivity extends AppCompatActivity {
 
-    Button callSignUp, login_btn;
+    Button login_btn;
     ImageView image;
-    TextView logoText, sloganText;
+    TextView logoText, sloganText, callSignUp;
     TextInputLayout username, password;
     FirebaseAuth firebaseAuth;
     CheckBox rememberMe;
@@ -57,7 +57,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_login2);
 
         callSignUp = findViewById(R.id.signup_screen);
         image = findViewById(R.id.logoImage);
@@ -88,20 +88,22 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 Intent intent = new Intent(LoginActivity.this, SignupActivity.class);
-                Pair[] pairs = new Pair[7];
+//                Pair[] pairs = new Pair[7];
+//
+//                pairs[0] = new Pair<View, String>(image, "logo_image");
+//                pairs[1] = new Pair<View, String>(logoText, "logo_text");
+//                pairs[2] = new Pair<View, String>(sloganText, "logo_sign");
+//                pairs[3] = new Pair<View, String>(username, "uname");
+//                pairs[4] = new Pair<View, String>(password, "passwd");
+//                pairs[5] = new Pair<View, String>(login_btn, "sign");
+//                pairs[6] = new Pair<View, String>(callSignUp, "bott_text");
 
-                pairs[0] = new Pair<View, String>(image, "logo_image");
-                pairs[1] = new Pair<View, String>(logoText, "logo_text");
-                pairs[2] = new Pair<View, String>(sloganText, "logo_sign");
-                pairs[3] = new Pair<View, String>(username, "uname");
-                pairs[4] = new Pair<View, String>(password, "passwd");
-                pairs[5] = new Pair<View, String>(login_btn, "sign");
-                pairs[6] = new Pair<View, String>(callSignUp, "bott_text");
+//                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+//                    ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(LoginActivity.this, pairs);
+//                    startActivity(intent, options.toBundle());
+//                }
+                startActivity(intent);
 
-                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
-                    ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(LoginActivity.this, pairs);
-                    startActivity(intent, options.toBundle());
-                }
             }
         });
 

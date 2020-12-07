@@ -1,0 +1,110 @@
+<LinearLayout android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingLeft="30dp"
+    android:paddingRight="30dp"
+    android:focusableInTouchMode="true"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <ImageView
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:adjustViewBounds="true"
+        android:cropToPadding="true"
+        android:src="@drawable/login_hero_image"
+        android:layout_marginLeft="60dp"
+        android:layout_marginRight="60dp"/>
+
+    <TextView
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        style="@style/viewParent"
+        android:text="Login"
+        android:textSize="@dimen/headerTextSize"
+        android:textColor="@color/blackTextColor"
+        android:textStyle="bold" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/parent.TextLayout"
+        android:id="@+id/username"
+        android:layout_marginTop="@dimen/signup_text_margin_top">
+
+        <EditText
+            android:id="@+id/login_username_editText"
+            style="@style/modifiedEditText"
+            android:inputType="textEmailAddress"
+            android:maxLines="1"
+            android:hint="Username"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/parent.TextLayout"
+        android:id="@+id/password"
+        android:layout_marginTop="@dimen/signup_text_margin_top">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/login_password_editText"
+            style="@style/modifiedEditText"
+            android:hint="password"
+            android:maxLines="1"
+            android:inputType="textPassword"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <CheckBox
+        android:checked="true"
+        android:id="@+id/remember_me"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:text="Remember Me"
+        android:buttonTint="#000000"
+        android:textColor="#000000" />
+
+    <Button
+        android:id="@+id/login_btn"
+        android:onClick="loginUser"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="60dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/blue_circle"
+        android:text="Login"
+        android:textColor="#fff" />
+
+    <TextView
+        android:id="@+id/signup_screen"
+        android:clickable="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textStyle="bold"
+        android:textColor="@color/blackTextColor"
+        android:textSize="12sp"
+        android:text="Don't have an Account?\nSign Up."
+        android:focusable="true" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <RelativeLayout
+            android:id="@+id/progressbar_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="20dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/white_circle"
+            android:elevation="8dp">
+            <ProgressBar
+                android:indeterminate="false"
+                android:id="@+id/login_progress_bar"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_centerInParent="true"/>
+
+        </RelativeLayout>
+    </RelativeLayout>
+</LinearLayout>

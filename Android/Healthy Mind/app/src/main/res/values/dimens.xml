@@ -5,6 +5,9 @@
     <dimen name="headerMoreTextSize">18sp</dimen>
     <dimen name="card_margin">5dp</dimen>
     <dimen name="frutorial_title">15sp</dimen>
+
+    <dimen name="newsMoreTextSize">16sp</dimen>
+    <dimen name="signup_text_margin_top">5dp</dimen>
 <!--    Home Cards -->
 
     <!-- Default screen margins, per the Android Design guidelines. -->
