@@ -2,14 +2,14 @@
 <paths xmlns:android="http://schemas.android.com/apk/res/android">
     <files-path
         name="internal-recordings"
-        path="." />
+        path="/audioData" />
     <external-files-path
         name="external-recordings"
-        path="." />
+        path="/audioData" />
     <external-path
         name="external"
-        path="." />
+        path="/audioData" />
     <cache-path
         name="cache"
-        path="." />
+        path="/audioData" />
 </paths>

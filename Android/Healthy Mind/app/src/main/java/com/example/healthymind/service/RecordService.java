@@ -4,6 +4,7 @@ import android.app.Notification;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.media.AudioFormat;
 import android.media.AudioManager;
 import android.media.MediaRecorder;
 import android.os.IBinder;
@@ -26,6 +27,22 @@ import com.example.healthymind.util.MySharedPreferences;
 import com.example.healthymind.util.UserPreferences;
 
 public class RecordService extends Service {
+
+    // Trying to create wav file
+    private static final int RECORDER_BPP = 16;
+    private static final String AUDIO_RECORDER_FILE_EXT_WAV = ".wav";
+    private static final String AUDIO_RECORDER_FOLDER = "AudioRecorder";
+    private static final String AUDIO_RECORDER_TEMP_FILE = "record_temp.raw";
+    private static final int RECORDER_SAMPLERATE = 44100;
+    private static final int RECORDER_CHANNELS = AudioFormat.CHANNEL_IN_STEREO;
+    private static final int RECORDER_AUDIO_ENCODING = AudioFormat.ENCODING_PCM_16BIT;
+    short[] audioData;
+    // Trying to create wav file
+
+
+
+
+
     private final SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmmss", Locale.US);
     private MediaRecorder recorder;
     private String phoneNumber;
@@ -204,6 +221,7 @@ public class RecordService extends Service {
             recorder.setAudioChannels(1);
             recorder.setAudioSamplingRate(44100);
             recorder.setAudioEncodingBitRate(192000);
+
             if (file == null) {
                 file = FileHelper.getFile(this, phoneNumber);
             }

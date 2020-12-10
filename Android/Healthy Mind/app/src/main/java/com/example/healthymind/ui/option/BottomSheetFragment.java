@@ -306,7 +306,7 @@ public class BottomSheetFragment extends BottomSheetDialogFragment {
                 .putExtra(Intent.EXTRA_STREAM, uri)
                 .setData(uri)
                 .addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-                .setType("audio/wavv");
+                .setType("audio/3gpp");
 
         getActivity().startActivity(Intent.createChooser(sendIntent,
                 getActivity().getString(R.string.send_mail)));
@@ -319,7 +319,7 @@ public class BottomSheetFragment extends BottomSheetDialogFragment {
             }
             Uri uri = Uri.parse(item.getUri());
             Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-            intent.setDataAndType(uri, "audio/wavv");
+            intent.setDataAndType(uri, "audio/3gpp");
             getActivity().startActivity(intent);
         } catch (ActivityNotFoundException e) {
             Toast.makeText(getActivity(), getString(R.string.can_recorder), Toast.LENGTH_SHORT).show();

@@ -290,6 +290,7 @@ class OverviewFragment : Fragment() {
 
                 // demoRef.setValue(predicted_result)
 
+                // Store depression result to DB
                 val sessionManager = SessionManager(getActivity(), SessionManager.SESSION_REMEMBERME)
 
                 if (sessionManager.checkRememberMe()) {
@@ -420,31 +421,11 @@ class OverviewFragment : Fragment() {
                         // trustedContactsListView.adapter = getActivity()?.let { MyContactListAdapter(it, R.layout.trusted_contactslv, contacts_list) }
                         val adapter = getActivity()?.let { MyContactListAdapter(it, R.layout.trusted_contactslv, contacts_list) }
                         trustedContactsListView.adapter = adapter
-                    } else {
+
+                    }else {
                         view.no_contacts.setVisibility(View.VISIBLE)
                         view.no_contacts.setText("You have not selected any contacts to share your progress with.")
                     }
-//                    val value = dataSnapshot.getValue().toString()
-//                    // val depLevelFromDB = dataSnapshot.child("patients").getValue(String::class.java)
-//                    // do your stuff here with value
-//
-//                    println("The contact details are: " + value)
-//                    contacts_list.add(ContactModel(value,   "+254 785 436 844",   R.drawable.green_circle  ))
-//
-//                    trustedContactsListView.adapter = getActivity()?.let { MyContactListAdapter(it, R.layout.trusted_contactslv, contacts_list) }
-//
-//                    trustedContactsListView.setOnItemClickListener{parent, view, position, id ->
-//
-//                        if (position==0){
-//                            Toast.makeText(getActivity(), "Contact One",   Toast.LENGTH_SHORT).show()
-//                        }
-//                        if (position==1){
-//                            Toast.makeText(getActivity(), "Contact Two",   Toast.LENGTH_SHORT).show()
-//                        }
-//                        if (position==2){
-//                            Toast.makeText(getActivity(), "Contact Three", Toast.LENGTH_SHORT).show()
-//                        }
-//                    }
                 }
 
                 override fun onCancelled(databaseError: DatabaseError?) {}
@@ -482,7 +463,10 @@ class OverviewFragment : Fragment() {
             }
         }
 
-
+        view.edit_contact.setOnClickListener( View.OnClickListener{
+            val intent = Intent(getActivity(), ProfileActivity::class.java)
+            startActivity(intent)
+        })
 
 //        view.classify_button.setOnClickListener(View.OnClickListener {
 //
@@ -491,13 +475,6 @@ class OverviewFragment : Fragment() {
 //
 //        })
 //         analyzePredictions()
-
-//       val edit_contact = view.edit_contact as TextView
-
-        view.edit_contact.setOnClickListener( View.OnClickListener{
-            val intent = Intent(getActivity(), ProfileActivity::class.java)
-            startActivity(intent)
-        })
 
         return view
 

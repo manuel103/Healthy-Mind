@@ -15,7 +15,7 @@ public class PhoneReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         String action = intent.getAction();
-        Log.i("HaiNm", "PhoneReceiver: Received unexpected intent: " + action);
+        Log.i("Emma", "PhoneReceiver: Received unexpected intent: " + action);
         if (!action.equals(TelephonyManager.ACTION_PHONE_STATE_CHANGED) &&
                 !action.equals(Intent.ACTION_NEW_OUTGOING_CALL)) {
             Log.e(Constants.TAG, "PhoneReceiver: Received unexpected intent: " + action);

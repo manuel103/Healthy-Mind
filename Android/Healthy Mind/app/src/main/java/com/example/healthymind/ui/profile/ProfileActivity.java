@@ -46,8 +46,8 @@ public class ProfileActivity extends AppCompatActivity implements AdapterView.On
     MyAdapter ma;
     Button select;
 
-    LinearLayout personalinfo, experience, review;
-    TextView personalinfobtn, experiencebtn, reviewbtn, profile_name, occupation;
+    LinearLayout personalinfo, experience;
+    TextView personalinfobtn, experiencebtn, profile_name, occupation;
     Button update, contacts_update;
     TextInputLayout update_email, update_phone_number, update_password;
     ProfileConstructor profile;
@@ -94,15 +94,15 @@ public class ProfileActivity extends AppCompatActivity implements AdapterView.On
         personalinfo = findViewById(R.id.personalinfo);
 //        update_contacts = findViewById(R.id.update_contacts);
         experience = findViewById(R.id.experience);
-        review = findViewById(R.id.review);
+//        review = findViewById(R.id.review);
         personalinfobtn = findViewById(R.id.personalinfobtn);
         experiencebtn = findViewById(R.id.experiencebtn);
-        reviewbtn = findViewById(R.id.reviewbtn);
+//        reviewbtn = findViewById(R.id.reviewbtn);
 
         /*making personal info visible*/
         personalinfo.setVisibility(View.VISIBLE);
         experience.setVisibility(View.GONE);
-        review.setVisibility(View.GONE);
+//        review.setVisibility(View.GONE);
 
 //Show All data
         showAllUserData();
@@ -113,10 +113,10 @@ public class ProfileActivity extends AppCompatActivity implements AdapterView.On
 
                 personalinfo.setVisibility(View.VISIBLE);
                 experience.setVisibility(View.GONE);
-                review.setVisibility(View.GONE);
+//                review.setVisibility(View.GONE);
                 personalinfobtn.setTextColor(getResources().getColor(R.color.designMainColor));
                 experiencebtn.setTextColor(getResources().getColor(R.color.miniDescription));
-                reviewbtn.setTextColor(getResources().getColor(R.color.miniDescription));
+//                reviewbtn.setTextColor(getResources().getColor(R.color.miniDescription));
 
             }
         });
@@ -127,27 +127,27 @@ public class ProfileActivity extends AppCompatActivity implements AdapterView.On
 
                 personalinfo.setVisibility(View.GONE);
                 experience.setVisibility(View.VISIBLE);
-                review.setVisibility(View.GONE);
+//                review.setVisibility(View.GONE);
                 personalinfobtn.setTextColor(getResources().getColor(R.color.miniDescription));
                 experiencebtn.setTextColor(getResources().getColor(R.color.designMainColor));
-                reviewbtn.setTextColor(getResources().getColor(R.color.miniDescription));
+//                reviewbtn.setTextColor(getResources().getColor(R.color.miniDescription));
 
             }
         });
 
-        reviewbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                personalinfo.setVisibility(View.GONE);
-                experience.setVisibility(View.GONE);
-                review.setVisibility(View.VISIBLE);
-                personalinfobtn.setTextColor(getResources().getColor(R.color.miniDescription));
-                experiencebtn.setTextColor(getResources().getColor(R.color.miniDescription));
-                reviewbtn.setTextColor(getResources().getColor(R.color.designMainColor));
-
-            }
-        });
+//        reviewbtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                personalinfo.setVisibility(View.GONE);
+//                experience.setVisibility(View.GONE);
+//                review.setVisibility(View.VISIBLE);
+//                personalinfobtn.setTextColor(getResources().getColor(R.color.miniDescription));
+//                experiencebtn.setTextColor(getResources().getColor(R.color.miniDescription));
+//                reviewbtn.setTextColor(getResources().getColor(R.color.designMainColor));
+//
+//            }
+//        });
 
         // Set test data
         profile_name.setText(_USERNAME);

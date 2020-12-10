@@ -37,7 +37,7 @@ public class FileHelper {
         String date = (String) DateFormat.format("yyyyMMddHHmmss", new Date());
         String filename = date + "_" + cleanNumber(phoneNumber);
 
-        return getStorageFile(context).createFile("audio/wavv", filename);
+        return getStorageFile(context).createFile("audio/3gpp", filename);
         // return getStorageFile(context).createFile(filename, ".wav");
     }
 
@@ -166,19 +166,35 @@ public class FileHelper {
     public static DocumentFile getStorageFile(Context context) {
         Uri uri = UserPreferences.getStorageUri();
         String scheme = uri.getScheme();
+        String audio_folder = "audioData";
+
+        File f = new File(uri.getPath() + "/" + audio_folder);
+
+        if (!f.exists()) {
+            f.mkdirs();
+        }
+
         if (scheme == null || scheme.equals("file")) {
-            return DocumentFile.fromFile(new File(uri.getPath()));
+            return DocumentFile.fromFile(f);
         } else {
             return DocumentFile.fromTreeUri(context, uri);
         }
     }
 
     public static Uri getContentUri(Context context, Uri uri) {
+
+        String audio_folder = "audioData";
+
+        File file = new File(uri.getPath() + "/" + audio_folder);
+
+        if (!file.exists()) {
+            file.mkdirs();
+        }
+
         if (uri.getScheme() == "content")
             return uri;
         return FileProvider.getUriForFile(context,
-                "com.healthymind.android.fileprovider",
-                new File(uri.getPath()));
+                "com.healthymind.android.fileprovider", file);
     }
 
     @SuppressWarnings("BooleanMethodIsAlwaysInverted")

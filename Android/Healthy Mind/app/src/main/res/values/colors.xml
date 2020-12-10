@@ -22,8 +22,8 @@
     <color name="whiteBodyColor">#FCFCFC</color>
     <color name="primaryTextColor">#13D3B4</color>
 <!--    Home Cards-->
-    <color name="colorPrimary">#FF4500</color>
-    <color name="colorPrimaryDark">#EE4000</color>
+    <color name="colorPrimary">@color/designMainColor</color>
+    <color name="colorPrimaryDark">@color/designMainColor</color>
     <color name="colorAccent">#FF4081</color>
     <color name="colorTro">#EEEEEE</color>
 

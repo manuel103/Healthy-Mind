@@ -1,4 +1,4 @@
-package com.example.healthymind.auth;
+ package com.example.healthymind.auth;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,8 +7,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.healthymind.R;
+import com.example.healthymind.ui.profile.ProfileActivity;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -54,6 +56,8 @@ public class SignupActivity extends AppCompatActivity {
 
                 UserHelper helper = new UserHelper(name, username, email, phoneNo, password);
                 reference.child(username).setValue(helper);
+                Toast.makeText(SignupActivity.this, "Account Created Successfully", Toast.LENGTH_LONG).show();
+
             }
         });
 

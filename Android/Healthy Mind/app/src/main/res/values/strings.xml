@@ -83,6 +83,7 @@
     <string name="setting_language">Language</string>
     <string name="setting_update">Update</string>
     <string name="setting_tcr">TCR 27.5</string>
+    <string name="setting_profile" translatable="false">Profile</string>
     <string name="tcr_policy">Privacy policy</string>
     <string name="update_ga">Google Analytics</string>
     <string name="language_title">Language</string>

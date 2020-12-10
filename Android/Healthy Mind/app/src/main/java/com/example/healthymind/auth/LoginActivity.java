@@ -43,8 +43,8 @@ import java.util.List;
 public class LoginActivity extends AppCompatActivity {
 
     Button login_btn;
-    ImageView image;
-    TextView logoText, sloganText, callSignUp;
+//    ImageView image;
+    TextView callSignUp;
     TextInputLayout username, password;
     FirebaseAuth firebaseAuth;
     CheckBox rememberMe;
@@ -60,9 +60,9 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login2);
 
         callSignUp = findViewById(R.id.signup_screen);
-        image = findViewById(R.id.logoImage);
-        logoText = findViewById(R.id.logo_name);
-        sloganText = findViewById(R.id.slogan_name);
+//        image = findViewById(R.id.logoImage);
+//        logoText = findViewById(R.id.logo_name);
+//        sloganText = findViewById(R.id.slogan_name);
         username = findViewById(R.id.username);
         password = findViewById(R.id.password);
         login_btn = findViewById(R.id.login_btn);

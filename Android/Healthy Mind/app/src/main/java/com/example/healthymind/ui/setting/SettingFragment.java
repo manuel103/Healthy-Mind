@@ -1,5 +1,6 @@
 package com.example.healthymind.ui.setting;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -17,6 +18,7 @@ import com.example.healthymind.R;
 import com.example.healthymind.entity.DrawerBean;
 import com.example.healthymind.listener.OnRecyclerViewItemClick;
 import com.example.healthymind.ui.BaseFragment;
+import com.example.healthymind.ui.profile.ProfileActivity;
 import com.example.healthymind.ui.setting.tcr.TCRFragment;
 import com.example.healthymind.ui.setting.general.GeneralFragment;
 import com.example.healthymind.ui.setting.language.LanguageFragment;
@@ -62,10 +64,11 @@ public class SettingFragment extends BaseFragment<SettingPresenter> implements S
         mDrawerBeans.add(new DrawerBean(R.drawable.ic_recorder_brown, getString(R.string.setting_recording), ValueConstants.NavigationItemType.Item));
 //        mDrawerBeans.add(new DrawerBean(R.drawable.ic_cloud_upload, getString(R.string.setting_cloud), ValueConstants.NavigationItemType.Item));
 //        mDrawerBeans.add(new DrawerBean(R.drawable.ic_sync, getString(R.string.recording_transfer), ValueConstants.NavigationItemType.Item));
-        mDrawerBeans.add(new DrawerBean(R.drawable.ic_flag, getString(R.string.setting_language), ValueConstants.NavigationItemType.Item));
 //        mDrawerBeans.add(new DrawerBean(R.drawable.ic_cloud_update, getString(R.string.setting_update), ValueConstants.NavigationItemType.Item));
-        mDrawerBeans.add(new DrawerBean(R.drawable.ic_support, getString(R.string.setting_tcr) + "", ValueConstants.NavigationItemType.Item));
-        mDrawerBeans.add(new DrawerBean(R.drawable.ic_storage_location, getString(R.string.storage_location_title), ValueConstants.NavigationItemType.Item));
+//        mDrawerBeans.add(new DrawerBean(R.drawable.ic_support, getString(R.string.setting_tcr) + "", ValueConstants.NavigationItemType.Item));
+//        mDrawerBeans.add(new DrawerBean(R.drawable.ic_storage_location, getString(R.string.storage_location_title), ValueConstants.NavigationItemType.Item));
+        mDrawerBeans.add(new DrawerBean(R.drawable.ic_person, getString(R.string.setting_profile), ValueConstants.NavigationItemType.Item));
+
 
         mLinearLayoutManager = new LinearLayoutManager(getActivity());
         mSettingAdapter = new SettingAdapter(getActivity());
@@ -94,17 +97,18 @@ public class SettingFragment extends BaseFragment<SettingPresenter> implements S
     @Override
     public void onItemClick(View view, Object item, int position) {
         switch (position) {
-            case 4:
-                FragmentUtil.showFragment(getActivity(), StorageFragment.newInstance(), true);
-                break;
-            case 3:
-                FragmentUtil.showFragment(getActivity(), TCRFragment.newInstance(), true);
-                break;
+//            case 2:
+//                FragmentUtil.showFragment(getActivity(), StorageFragment.newInstance(), true);
+//                break;
+//            case 2:
+//                FragmentUtil.showFragment(getActivity(), TCRFragment.newInstance(), true);
+//                break;
 //            case 3:
 //                FragmentUtil.showFragment(getActivity(), UpdateFragment.newInstance(), true);
 //                break;
             case 2:
-                FragmentUtil.showFragment(getActivity(), LanguageFragment.newInstance(), true);
+                Intent intent = new Intent(getActivity(), ProfileActivity.class);
+                startActivity(intent);
                 break;
 //            case 3:
 //                break;
