@@ -7,6 +7,7 @@ import android.database.Cursor;
 import android.media.MediaMetadataRetriever;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Environment;
 import android.os.StatFs;
 import android.provider.ContactsContract;
 
@@ -16,14 +17,17 @@ import androidx.documentfile.provider.DocumentFile;
 
 import android.telephony.PhoneNumberUtils;
 import android.text.format.DateFormat;
+import android.text.format.Time;
 import android.util.Log;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import com.example.healthymind.entity.Recording;
+import com.example.healthymind.service.ConvertToWav;
 import com.example.healthymind.util.Constants;
 import com.example.healthymind.util.UserPreferences;
 
@@ -33,6 +37,9 @@ public class FileHelper {
      *
      * @throws Exception
      */
+
+
+
     public static DocumentFile getFile(Context context, @NonNull String phoneNumber) throws Exception {
         String date = (String) DateFormat.format("yyyyMMddHHmmss", new Date());
         String filename = date + "_" + cleanNumber(phoneNumber);
@@ -98,7 +105,7 @@ public class FileHelper {
         return res;
     }
 
-    private static String cleanNumber(String phoneNumber) {
+    public static String cleanNumber(String phoneNumber) {
         return phoneNumber.replaceAll("[^0-9]", "");
     }
 
@@ -107,12 +114,14 @@ public class FileHelper {
         final DocumentFile directory = getStorageFile(context);
 
         DocumentFile[] files = directory.listFiles();
+
         List<Recording> fileList = new ArrayList<>();
         for (DocumentFile file : files) {
             if (!file.getName().matches(Constants.FILE_NAME_PATTERN)) {
                 Log.d(Constants.TAG, String.format(
                         "'%s' didn't match the file name pattern",
                         file.getName()));
+
                 continue;
             }
             Recording recording = new Recording(file.getName());
@@ -181,15 +190,20 @@ public class FileHelper {
         }
     }
 
+
+
     public static Uri getContentUri(Context context, Uri uri) {
 
         String audio_folder = "audioData";
+
 
         File file = new File(uri.getPath() + "/" + audio_folder);
 
         if (!file.exists()) {
             file.mkdirs();
         }
+
+
 
         if (uri.getScheme() == "content")
             return uri;

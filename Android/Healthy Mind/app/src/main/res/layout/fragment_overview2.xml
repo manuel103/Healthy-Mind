@@ -5,7 +5,8 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".ui.all.OverviewFragment"
     tools:showIn="@layout/app_bar_main"
-    style="@style/parent.contentLayout">
+    style="@style/parent.contentLayout"
+    android:id="@+id/overview_frag">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"

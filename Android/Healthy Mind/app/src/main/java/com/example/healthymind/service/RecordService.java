@@ -4,16 +4,18 @@ import android.app.Notification;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
-import android.media.AudioFormat;
 import android.media.AudioManager;
 import android.media.MediaRecorder;
+import android.os.Build;
+import android.os.Environment;
 import android.os.IBinder;
 import android.os.ParcelFileDescriptor;
+import android.text.format.DateFormat;
 import android.util.Log;
 import android.widget.Toast;
 
+import androidx.annotation.RequiresApi;
 import androidx.documentfile.provider.DocumentFile;
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -22,27 +24,13 @@ import com.example.healthymind.App;
 import com.example.healthymind.R;
 import com.example.healthymind.entity.Recording;
 import com.example.healthymind.helper.FileHelper;
+import com.example.healthymind.ui.all.OverviewFragment;
 import com.example.healthymind.util.Constants;
 import com.example.healthymind.util.MySharedPreferences;
 import com.example.healthymind.util.UserPreferences;
 
+@RequiresApi(api = Build.VERSION_CODES.O)
 public class RecordService extends Service {
-
-    // Trying to create wav file
-    private static final int RECORDER_BPP = 16;
-    private static final String AUDIO_RECORDER_FILE_EXT_WAV = ".wav";
-    private static final String AUDIO_RECORDER_FOLDER = "AudioRecorder";
-    private static final String AUDIO_RECORDER_TEMP_FILE = "record_temp.raw";
-    private static final int RECORDER_SAMPLERATE = 44100;
-    private static final int RECORDER_CHANNELS = AudioFormat.CHANNEL_IN_STEREO;
-    private static final int RECORDER_AUDIO_ENCODING = AudioFormat.ENCODING_PCM_16BIT;
-    short[] audioData;
-    // Trying to create wav file
-
-
-
-
-
     private final SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmmss", Locale.US);
     private MediaRecorder recorder;
     private String phoneNumber;
@@ -54,6 +42,14 @@ public class RecordService extends Service {
     private String idCall;
     public static AudioManager audioManager;
 
+    String path = Environment.getExternalStorageDirectory() + "/audioData/" + System.currentTimeMillis() + ".wav";
+    WavRecorder wavRecorder = new WavRecorder(path);
+    OverviewFragment depression_prediction = new OverviewFragment();
+
+//    OverviewFragment fragment = (OverviewFragment) getFragmentManager().findFragmentById(R.id.example_fragment);
+
+
+
     @Override
     public IBinder onBind(Intent intent) {
         return null;
@@ -63,11 +59,15 @@ public class RecordService extends Service {
     public void onCreate() {
         super.onCreate();
         startForeground(1, new Notification());
+//        depression_prediction.analyzePredictions();
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+
         Log.d(Constants.TAG, "RecordService onStartCommand");
+//        wavRecorder.getRecordingState();
+
         if (intent == null)
             return START_NOT_STICKY;
 
@@ -91,6 +91,7 @@ public class RecordService extends Service {
                 if (onCall && phoneNumber != null && recording) {
                     Log.d(Constants.TAG, "RecordService STATE_STOP_RECORDING");
                     stopAndReleaseRecorder();
+//                    wavRecorder.stopRecording();
                     recording = false;
                 }
                 break;
@@ -104,6 +105,8 @@ public class RecordService extends Service {
                 onCall = true;
                 if (enabled && phoneNumber != null && !recording) {
                     idCall = formatter.format(new Date());
+
+                    wavRecorder.startRecording();
                     startRecordingBySource();
                 }
                 break;
@@ -112,6 +115,13 @@ public class RecordService extends Service {
                 onCall = false;
                 phoneNumber = null;
                 recording = false;
+
+//                if (depression_prediction != null){
+//                    depression_prediction.analyzePredictions();
+//                }
+
+
+                wavRecorder.stopRecording();
                 stopAndReleaseRecorder();
                 break;
         }
@@ -122,6 +132,9 @@ public class RecordService extends Service {
     public void onDestroy() {
         Log.d(Constants.TAG, "RecordService onDestroy");
         stopAndReleaseRecorder();
+//        wavRecorder.stopRecording();
+
+//        wavRecorder.releaseRecord();
         super.onDestroy();
     }
 
@@ -167,6 +180,10 @@ public class RecordService extends Service {
             Toast.makeText(this, this.getString(R.string.receiver_end_call),
                     Toast.LENGTH_SHORT)
                     .show();
+
+
+//            wavRecorder.stopRecording();
+
             Recording recording = new Recording();
             recording.setIdCall(idCall);
             recording.setOutGoing(App.isOutComming);
@@ -174,6 +191,7 @@ public class RecordService extends Service {
             recording.save();
             file = null;
             Log.d(Constants.TAG, "RecordService save");
+
         }
     }
 
@@ -183,15 +201,19 @@ public class RecordService extends Service {
         Log.d(Constants.TAG, "RecordService source: " + source);
         if (source != 0) {
             exception = startRecording(source);
+
         } else {
-            exception = startRecording(MediaRecorder.AudioSource.VOICE_CALL);
+//            exception = startRecording(MediaRecorder.AudioSource.VOICE_CALL);
+
+
             if (exception) {
                 exception = startRecording(MediaRecorder.AudioSource.MIC);
+
                 if (!exception) {
                     audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
                     audioManager.setStreamVolume(3, audioManager.getStreamMaxVolume(3), 0);
                     audioManager.setMode(AudioManager.MODE_IN_CALL);
-                    audioManager.setSpeakerphoneOn(true);
+                    audioManager.setSpeakerphoneOn(false);
                 }
             }
         }
@@ -205,6 +227,7 @@ public class RecordService extends Service {
             toast.show();
         }
     }
+
 
     private boolean startRecording(int source) {
         Log.d(Constants.TAG, "RecordService startRecording");
@@ -220,7 +243,11 @@ public class RecordService extends Service {
             recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AAC);
             recorder.setAudioChannels(1);
             recorder.setAudioSamplingRate(44100);
-            recorder.setAudioEncodingBitRate(192000);
+            recorder.setAudioEncodingBitRate(1024 * 1024);
+
+            String date = (String) DateFormat.format("yyyyMMddHHmmss", new Date());
+//            wavRecorder.getFileName(date);
+
 
             if (file == null) {
                 file = FileHelper.getFile(this, phoneNumber);
@@ -229,7 +256,10 @@ public class RecordService extends Service {
                     .openFileDescriptor(file.getUri(), "w");
             if (fd == null)
                 throw new Exception("Failed open recording file.");
+
             recorder.setOutputFile(fd.getFileDescriptor());
+
+
             recorder.setOnErrorListener((mr, what, extra) -> {
                 Log.e(Constants.TAG, "OnErrorListener " + what + "," + extra);
                 terminateAndEraseFile();
@@ -253,10 +283,12 @@ public class RecordService extends Service {
                     this.getString(R.string.receiver_start_call),
                     Toast.LENGTH_SHORT);
             toast.show();
+
             return false;
         } catch (Exception e) {
             Log.d(Constants.TAG, "RecordService: Exception!");
         }
         return true;
     }
+
 }

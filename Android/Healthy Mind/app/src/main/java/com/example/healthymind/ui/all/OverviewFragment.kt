@@ -2,6 +2,7 @@ package com.example.healthymind.ui.all
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.os.Environment
 import android.util.Log
 import android.view.LayoutInflater
@@ -9,13 +10,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ListView
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.example.healthymind.R
 import com.example.healthymind.analysis.Recognition
 import com.example.healthymind.audio.MFCC
 import com.example.healthymind.audio.WavFile
 import com.example.healthymind.auth.SessionManager
+import com.example.healthymind.auth.SignupActivity
 import com.example.healthymind.ui.onboarding.ContactModel
 import com.example.healthymind.ui.onboarding.Model
 import com.example.healthymind.ui.onboarding.MyContactListAdapter
@@ -72,6 +73,7 @@ class OverviewFragment : Fragment() {
         }
 
     }
+
 
 
     fun predictDepression(audioFilePath: String): String? {
@@ -264,19 +266,21 @@ class OverviewFragment : Fragment() {
         val externalStorage: File = Environment.getExternalStorageDirectory()
         val audioDirPath = externalStorage.absolutePath + "/audioData";
         val fileNames: MutableList<String> = ArrayList()
+        val fileNames2: MutableList<String> = ArrayList()
+        val fileNames3: MutableList<String> = ArrayList()
 
         File(audioDirPath).walk().forEach {
 
             if (it.absolutePath.endsWith(".wav")) {
                 fileNames.add(it.name)
             }
-
         }
 
         // Loop over all the recordings in the audioDir path &
         // display the depression results
 
         var i = 0
+        var x = 0
 
         val file_array = arrayOf(fileNames)
 
@@ -284,11 +288,10 @@ class OverviewFragment : Fragment() {
             val file_size = file.size
             while (i < file_size) {
                 val audio_files = file_array[0][i]
+
                 val full_audioPath = audioDirPath + "/" + audio_files
                 val predicted_result = predictDepression(full_audioPath)
                 println("Depression result is: " + predicted_result)
-
-                // demoRef.setValue(predicted_result)
 
                 // Store depression result to DB
                 val sessionManager = SessionManager(getActivity(), SessionManager.SESSION_REMEMBERME)
@@ -296,29 +299,21 @@ class OverviewFragment : Fragment() {
                 if (sessionManager.checkRememberMe()) {
                     val rememberMeDetails = sessionManager.rememberMeDetailFromSession
                     val username = rememberMeDetails[SessionManager.KEY_SESSIONUSERNAME]
-                    // Log.d(username, "Is the current logged in user....")
-
                     val patientRef = FirebaseDatabase
                             .getInstance()
                             .getReference(Constants.FIREBASE_CHILD_DEPRESSION_LEVELS)
                             .child(username)
                             .child("depression_levels")
 
-                    val pushRef = patientRef.child("prediction_" + i)
-
-                    // val pushId = pushRef.key
-                    pushRef.setValue(predicted_result)
-                    // Toast.makeText(context, "Saved", Toast.LENGTH_SHORT).show()
+//                        val pushRef = patientRef.child("prediction_" + i)
+                    patientRef.push().setValue(predicted_result)
                 }
-
-                // result_text.text = "Predicted Result :" + predicted_result
                 i++
 
             }
         }
 
     }
-
 
     //        Check if user exists in DB
     fun fetch() {
@@ -348,6 +343,7 @@ class OverviewFragment : Fragment() {
                 override fun onCancelled(databaseError: DatabaseError?) {}
             })
         }
+
 
 
 //        var reference: DatabaseReference? = FirebaseDatabase.getInstance().getReference("patients")
@@ -382,7 +378,16 @@ class OverviewFragment : Fragment() {
 //        }
     }
 
-
+//    fun test(intent: Intent){
+//        val commandType: Int = intent.getIntExtra("commandType", 0)
+//
+//        when (commandType) {
+//            Constants.STATE_CALL_END -> {
+//                Log.d(Constants.TAG, "RecordService STATE_CALL_END")
+//                analyzePredictions();
+//            }
+//        }
+//    }
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -422,7 +427,7 @@ class OverviewFragment : Fragment() {
                         val adapter = getActivity()?.let { MyContactListAdapter(it, R.layout.trusted_contactslv, contacts_list) }
                         trustedContactsListView.adapter = adapter
 
-                    }else {
+                    } else {
                         view.no_contacts.setVisibility(View.VISIBLE)
                         view.no_contacts.setText("You have not selected any contacts to share your progress with.")
                     }
@@ -463,18 +468,25 @@ class OverviewFragment : Fragment() {
             }
         }
 
-        view.edit_contact.setOnClickListener( View.OnClickListener{
+        view.edit_contact.setOnClickListener(View.OnClickListener {
             val intent = Intent(getActivity(), ProfileActivity::class.java)
             startActivity(intent)
         })
 
-//        view.classify_button.setOnClickListener(View.OnClickListener {
-//
-//            // analyzePredictions()
-//            fetch()
-//
-//        })
 //         analyzePredictions()
+
+//        val timer = object: CountDownTimer(10000, 3000) {
+//            override fun onTick(millisUntilFinished: Long) {
+//                // do something
+//                analyzePredictions()
+//
+//            }
+//            override fun onFinish() {
+//                // do something
+//            }
+//        }
+//        timer.start()
+
 
         return view
 

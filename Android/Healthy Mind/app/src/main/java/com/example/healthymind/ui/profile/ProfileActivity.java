@@ -2,13 +2,17 @@ package com.example.healthymind.ui.profile;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.documentfile.provider.DocumentFile;
 
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.ContactsContract;
+import android.text.format.DateFormat;
+import android.text.format.Time;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,9 +27,13 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.activeandroid.util.Log;
 import com.example.healthymind.R;
 import com.example.healthymind.auth.SessionManager;
+import com.example.healthymind.helper.FileHelper;
+import com.example.healthymind.service.ConvertToWav;
 import com.example.healthymind.ui.MainActivity;
+import com.example.healthymind.ui.all.OverviewFragment;
 import com.example.healthymind.ui.onboarding.Page2Activity;
 import com.example.healthymind.ui.onboarding.ProfileConstructor;
 import com.google.android.material.textfield.TextInputLayout;
@@ -35,7 +43,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -44,7 +55,7 @@ public class ProfileActivity extends AppCompatActivity implements AdapterView.On
     List<String> name1 = new ArrayList<String>();
     List<String> phno1 = new ArrayList<String>();
     MyAdapter ma;
-    Button select;
+    Button select, converter;
 
     LinearLayout personalinfo, experience;
     TextView personalinfobtn, experiencebtn, profile_name, occupation;
@@ -53,6 +64,7 @@ public class ProfileActivity extends AppCompatActivity implements AdapterView.On
     ProfileConstructor profile;
 
     String _USERNAME;
+    Context context;
 
     DatabaseReference reference;
 
@@ -78,7 +90,9 @@ public class ProfileActivity extends AppCompatActivity implements AdapterView.On
         lv.setTextFilterEnabled(true);
         // adding
 
+        OverviewFragment analyze = new OverviewFragment();
         select = (Button) findViewById(R.id.contacts_update);
+//        converter = (Button) findViewById(R.id.convert);
 
         reference = FirebaseDatabase.getInstance().getReference("patients").child(_USERNAME);
 
@@ -102,6 +116,7 @@ public class ProfileActivity extends AppCompatActivity implements AdapterView.On
         /*making personal info visible*/
         personalinfo.setVisibility(View.VISIBLE);
         experience.setVisibility(View.GONE);
+
 //        review.setVisibility(View.GONE);
 
 //Show All data
@@ -180,6 +195,32 @@ public class ProfileActivity extends AppCompatActivity implements AdapterView.On
 
         });
 
+
+//        converter.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+////                ConvertToWav ctw = new ConvertToWav();
+////                File waveFile = getFile2("wav");
+////                File mRecording = getFile2("3gpp");
+//
+//                FileHelper fh = new FileHelper();
+//
+//
+////                Log.d("3GPP files are: " + mRecording);
+//
+////                try {
+////                    Log.d(ctw.rawToWave(mRecording, waveFile));
+////
+////                } catch (IOException e) {
+////                    e.printStackTrace();
+////                }
+//            }
+//
+//        });
+
+//        analyze.analyzePredictions();
+
+//        Convert(context);
     }
 
     public void getAllContacts(ContentResolver cr) {
@@ -338,6 +379,8 @@ public class ProfileActivity extends AppCompatActivity implements AdapterView.On
         finish();
     }
 
+
+
     class MyAdapter extends BaseAdapter implements CompoundButton.OnCheckedChangeListener {
         private SparseBooleanArray mCheckStates;
         LayoutInflater mInflater;
@@ -406,4 +449,5 @@ public class ProfileActivity extends AppCompatActivity implements AdapterView.On
             mCheckStates.put((Integer) buttonView.getTag(), isChecked);
         }
     }
+
 }

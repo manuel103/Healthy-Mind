@@ -5,6 +5,7 @@ import android.annotation.SuppressLint;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.activeandroid.util.Log;
 import com.example.healthymind.entity.MessageEvent;
 import com.example.healthymind.entity.Recording;
 import com.example.healthymind.ui.all.AllCallFragment;
@@ -20,6 +21,8 @@ public class InComingFragment extends AllCallFragment {
             if (!recorder.isOutGoing()) {
                 listInComing.add(recorder);
             }
+
+//            Log.d("Stuuuuuf...." + recorder);
         }
         formatData(listInComing);
         mCallAdapter.dataSet.clear();
