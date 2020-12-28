@@ -1,0 +1,70 @@
+{
+    "patients": [
+        {
+            "depression_levels": {
+                "prediction_0": "moderate",
+                "prediction_1": "mild",
+                "prediction_2": "normal",
+                "prediction_3": "mild",
+                "prediction_4": "normal",
+                "prediction_5": "normal",
+                "prediction_6": "moderate",
+                "prediction_7": "normal",
+                "prediction_8": "none"
+            },
+            "email": "emnokwiri@gmail.com",
+            "name": "Emmanuel Owino",
+            "password": "Kareenah03",
+            "phoneNo": "0797493028",
+            "profile": {
+                "contacts": {
+                    "contacts": "Naomi: +254 701 276605, Naomi Mwangi: +254 701 276605, Mbiraru: +254 701 664931, ",
+                    "notify": "No"
+                },
+                "general": {
+                    "age": "22",
+                    "education": "Graduate",
+                    "employment": "Employed",
+                    "gender": "Male"
+                }
+            },
+            "username": "Emmanuel"
+        },
+        {
+            "email": "enokwiri@gmail.com",
+            "name": "Phyllis Keanu",
+            "password": "113",
+            "phoneNo": "6849",
+            "profile": {
+                "age": "23",
+                "contacts": {
+                    "contacts": "Japheth: +254 707 249736, Jesse: +254 707 865753, ",
+                    "notify": "No"
+                },
+                "education": "Graduate",
+                "employment": "Employed",
+                "gender": "Female",
+                "general": {
+                    "age": "23",
+                    "education": "Highschool",
+                    "employment": "Employed",
+                    "gender": "Male"
+                }
+            },
+            "username": "Phyllis"
+        },
+        {
+            "email": "enokwiri@gmail.com",
+            "name": "Muriuki Nnjenga",
+            "password": "123",
+            "phoneNo": "086548554",
+            "profile": {
+                "age": "21",
+                "education": "College",
+                "employment": "Student",
+                "gender": "Male"
+            },
+            "username": "muriuki"
+        }
+    ]
+}
