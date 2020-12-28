@@ -7,8 +7,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <ImageView
-        android:layout_width="250dp"
-        android:layout_height="250dp"
+        android:layout_width="230dp"
+        android:layout_height="230dp"
         android:adjustViewBounds="true"
         android:cropToPadding="true"
         android:src="@drawable/login_hero_image"
@@ -89,7 +89,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="100dp">
         <RelativeLayout
             android:id="@+id/progressbar_layout"
             android:layout_width="wrap_content"

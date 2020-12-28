@@ -1,8 +1,5 @@
 package com.example.healthymind.entity;
 
-/**
- * Created by Harry_Hai on 2/22/2018.
- */
 
 public class PayPalEntity {
     String price;

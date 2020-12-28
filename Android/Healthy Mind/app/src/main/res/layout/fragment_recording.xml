@@ -118,7 +118,9 @@
             <RelativeLayout
                 android:id="@+id/layoutAudioSource"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:visibility="invisible"
+                >
 
                 <LinearLayout
                     android:layout_width="match_parent"

@@ -67,7 +67,7 @@
     <string name="send_mail">Send Call Recording</string>
     <string name="option">Play Call Recorder</string>
     <string name="title">Selection Option</string>
-    <string name="txt_about">This android application allows your psychiatrist to keep track of your mental health through phone calls on your phone.
+    <string name="txt_about">This android application allows your psychiatrist to keep track of your mental health through the analysis of phone calls made on your phone.
         \n
         \nNone of your conversations are shared or processed externally. All the processing is performed locally on your phone.
 \nYou can enable/disable the application. For best results, it is recommended that you or leave it enabled.
@@ -107,7 +107,7 @@
     <string name="general_notice">Notification</string>
     <string name="general_notice_sub">Show notification when enabled</string>
     <string name="general_recyle">Recycle Bin</string>
-    <string name="general_recyle_sub">Move delete files to Recycle Bin</string>
+    <string name="general_recyle_sub">Move audio recordings to recycle bin</string>
     <string name="general_player">Internal media player</string>
     <string name="general_player_sub">Use internal media player to play recordings</string>
     <string name="general_library">Library</string>

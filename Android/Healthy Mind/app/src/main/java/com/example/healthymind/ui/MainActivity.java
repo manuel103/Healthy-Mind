@@ -133,9 +133,9 @@ public class MainActivity extends BaseActivity
     private void setUpViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFrag(new OverviewFragment(), getString(R.string.tab_overview));
-        adapter.addFrag(new InComingFragment(), getString(R.string.tab_incoming));
-        adapter.addFrag(new OutGoingFragment(), getString(R.string.tab_outgoing));
-        adapter.addFrag(new ImportantFragment(), getString(R.string.tab_important));
+//        adapter.addFrag(new InComingFragment(), getString(R.string.tab_incoming));
+//        adapter.addFrag(new OutGoingFragment(), getString(R.string.tab_outgoing));
+//        adapter.addFrag(new ImportantFragment(), getString(R.string.tab_important));
         viewPager.setAdapter(adapter);
         viewPager.setOffscreenPageLimit(1);
         tableLayout.setSelectedTabIndicatorColor(getResources().getColor(R.color.colorWhite));
@@ -309,11 +309,11 @@ public class MainActivity extends BaseActivity
 //            case 8:
 //                goApp(true, "com.example.healthymind");
 //                break;
+//            case 4:
+//                DialogFragment dialogFragment = SetThemeDialogFragment.newInstance(new MaterialTheme(theme));
+//                DialogUtils.showDialogFragment(getSupportFragmentManager(), dialogFragment);
+//                break;
             case 4:
-                DialogFragment dialogFragment = SetThemeDialogFragment.newInstance(new MaterialTheme(theme));
-                DialogUtils.showDialogFragment(getSupportFragmentManager(), dialogFragment);
-                break;
-            case 5:
                 finish();
                 break;
 //            case 11:

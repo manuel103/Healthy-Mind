@@ -37,6 +37,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.security.MessageDigest;
 import java.util.HashMap;
 import java.util.List;
 
@@ -148,16 +149,36 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
+    public static String sha256(String base) {
+        try{
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            byte[] hash = digest.digest(base.getBytes("UTF-8"));
+            StringBuffer hexString = new StringBuffer();
+
+            for (int i = 0; i < hash.length; i++) {
+                String hex = Integer.toHexString(0xff & hash[i]);
+                if(hex.length() == 1) hexString.append('0');
+                hexString.append(hex);
+            }
+
+            return hexString.toString();
+        } catch(Exception ex){
+            throw new RuntimeException(ex);
+        }
+    }
+
     private void isUser() {
         final String userEnteredUsername = username.getEditText().getText().toString().trim();
         final String userEnteredPassword = password.getEditText().getText().toString().trim();
+        String newPass =  sha256(userEnteredPassword);
+
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("patients");
 
         if (rememberMe.isChecked()) {
             // Create remember me session
             SessionManager sessionManager = new SessionManager(LoginActivity.this, SessionManager.SESSION_REMEMBERME);
-            sessionManager.createRememberMeSession(userEnteredUsername, userEnteredPassword);
+            sessionManager.createRememberMeSession(userEnteredUsername, newPass);
 
         }
 //        Check if user exists in DB
@@ -172,7 +193,8 @@ public class LoginActivity extends AppCompatActivity {
 
                     String passwordFromDB = dataSnapshot.child(userEnteredUsername).child("password").getValue(String.class);
 
-                    if (passwordFromDB != null && passwordFromDB.equals(userEnteredPassword)) {
+
+                    if (passwordFromDB != null && passwordFromDB.equals(newPass)) {
 
                         username.setError(null);
                         username.setErrorEnabled(false);

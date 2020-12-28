@@ -46,7 +46,7 @@ public class SetThemeDialogFragment extends DialogFragment implements DialogInte
         // Get passed in parameters
         Bundle args = getArguments();
 
-        // If no parameters were passed in, default them
+        // If no parameters were passed in, default theme
         if (args == null) {
             mCurrentTheme = null;
         }

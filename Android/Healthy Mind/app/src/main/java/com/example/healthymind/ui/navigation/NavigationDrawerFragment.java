@@ -87,7 +87,7 @@ public class NavigationDrawerFragment extends Fragment implements OnRecyclerView
         mDrawerBeans.add(new DrawerBean(R.drawable.ic_about, getString(R.string.menu_about), ValueConstants.NavigationItemType.Item));
         // mDrawerBeans.add(new DrawerBean(R.drawable.ic_donate, getString(R.string.menu_donate), ValueConstants.NavigationItemType.Item));
         // mDrawerBeans.add(new DrawerBean(R.drawable.ic_more, getString(R.string.menu_more), ValueConstants.NavigationItemType.Item));
-        mDrawerBeans.add(new DrawerBean(R.drawable.ic_paint, getString(R.string.menu_paint), ValueConstants.NavigationItemType.Item));
+//        mDrawerBeans.add(new DrawerBean(R.drawable.ic_paint, getString(R.string.menu_paint), ValueConstants.NavigationItemType.Item));
         mDrawerBeans.add(new DrawerBean(R.drawable.ic_exit, getString(R.string.menu_exit), ValueConstants.NavigationItemType.Item));
         // mDrawerBeans.add(new DrawerBean(R.drawable.ic_power, getString(R.string.menu_power), ValueConstants.NavigationItemType.Item));
 
