@@ -11,8 +11,6 @@ import android.media.AudioRecord;
 import android.media.MediaRecorder;
 import android.os.Environment;
 
-import com.example.healthymind.ui.all.OverviewFragment;
-
 public class WavRecorder {
     private static final int RECORDER_BPP = 16;
     private static final String AUDIO_RECORDER_FOLDER = "audioData";
@@ -27,7 +25,6 @@ public class WavRecorder {
     private int bufferSize = 0;
     private Thread recordingThread = null;
     private boolean isRecording = false;
-    OverviewFragment depression_prediction = new OverviewFragment();
 
     private String output;
 
@@ -132,8 +129,6 @@ public class WavRecorder {
 
         copyWaveFile(getTempFilename(), getFilename());
         deleteTempFile();
-        depression_prediction.analyzePredictions();
-
     }
 
     private void deleteTempFile() {
