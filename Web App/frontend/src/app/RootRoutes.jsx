@@ -13,9 +13,10 @@ import mapRoutes from "./views/map/MapRoutes";
 
 const redirectRoute = [
   {
+    
     path: "/",
     exact: true,
-    component: () => <Redirect to="/dashboard/analytics" />
+    component: () => <Redirect to="/dashboard/patients" />
   }
 ];
 

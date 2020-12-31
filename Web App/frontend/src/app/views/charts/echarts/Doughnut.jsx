@@ -2,14 +2,34 @@ import React, { useEffect, useState } from "react";
 import ReactEcharts from "echarts-for-react";
 import { withStyles } from "@material-ui/styles";
 // import axios from "../../../../axios";
+import { fireDb } from "../../../services/firebase/firebaseConfig";
 
 const DoughnutChart = ({ height, color = [], theme }) => {
   const [patients, setPatients] = useState([]);
+  const [user, setUser] = useState("");
+
+  const authListener = () => {
+    fireDb.auth().onAuthStateChanged((user) => {
+      // clearInputs();
+      if (user) {
+        setUser(user);
+      } else {
+        setUser("");
+      }
+    });
+  };
+
+  useEffect(() => {
+    authListener();
+  }, []);
 
   useEffect(() => {
     async function loadPatients() {
       //fetch the patient list
-      const request = await fetch("http://localhost:9000/api/getPatients", {});
+      const request = await fetch(
+        "https://healthymind.herokuapp.com/api/getPatients",
+        {}
+      );
       // const request = await axios.get("/api/getPatients");
 
       const allPatients = await request.json();
@@ -24,7 +44,7 @@ const DoughnutChart = ({ height, color = [], theme }) => {
     loadPatients();
   }, []);
 
-  const P_depression = patients;
+
   let none_count = 0;
   let normal_count = 0;
   let mild_count = 0;
@@ -32,30 +52,38 @@ const DoughnutChart = ({ height, color = [], theme }) => {
   let moderatelySevere_count = 0;
   let severe_count = 0;
   let extreme_count = 0;
+  let docPatients = [];
 
-  
-  P_depression.forEach(function (item) {
-    item.depression_levels && Object.keys(item.depression_levels).forEach(function (key) {
-      const depression_levels = item.depression_levels[key];
-      if (depression_levels == "none") {
-        none_count += 1;
-      } else if (depression_levels == "normal") {
-        normal_count += 1;
-      } else if (depression_levels == "mild") {
-        mild_count += 1;
-      } else if (depression_levels == "severe") {
-        severe_count += 1;
-      } else if (depression_levels == "moderately severe") {
-        moderatelySevere_count += 1;
-      } else if (depression_levels == "moderate") {
-        moderate_count += 1;
-      } else {
-        extreme_count += 1;
+  patients &&
+    Object.keys(patients).forEach(function (key) {
+      const data = patients[key];
+      if (data.docId === user.email) {
+        docPatients.push(data);
       }
     });
-  });
 
-  // console.log(P_depression);
+  docPatients.forEach(function (item) {
+    item.depression_levels &&
+      Object.keys(item.depression_levels).forEach(function (key) {
+        const depression_levels = item.depression_levels[key];
+
+        if (depression_levels == "none") {
+          none_count += 1;
+        } else if (depression_levels == "normal") {
+          normal_count += 1;
+        } else if (depression_levels == "mild") {
+          mild_count += 1;
+        } else if (depression_levels == "severe") {
+          severe_count += 1;
+        } else if (depression_levels == "moderately severe") {
+          moderatelySevere_count += 1;
+        } else if (depression_levels == "moderate") {
+          moderate_count += 1;
+        } else {
+          extreme_count += 1;
+        }
+      });
+  });
 
   const option = {
     legend: {

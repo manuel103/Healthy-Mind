@@ -37,10 +37,13 @@ const LoginReducer = function(state = initialState, action) {
       };
     }
     case LOGIN_ERROR: {
+      console.log('login error')
       return {
-        success: false,
-        loading: false,
-        error: action.data
+        ...state,
+        // success: false,
+        // loading: false,
+        // error: action.data
+        error: 'Login error'
       };
     }
     default: {

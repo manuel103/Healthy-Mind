@@ -1,3 +1,9 @@
+// import firebase from 'firebase/app'
+// import 'firebase/firestore'
+// import 'firebase/auth'
+
+import * as firebase from "firebase"
+
 const firebaseConfig = {
   apiKey: "AIzaSyC-3wSwrRkO2i3LzjHDOvWDToiaPw4krsY",
   authDomain: "dl4ddoa.firebaseapp.com",
@@ -8,5 +14,6 @@ const firebaseConfig = {
   appId: "1:163619020443:web:5f597d5ab8b864a28db03e",
 };
 
-export default firebaseConfig;
+export var fireDb = firebase.initializeApp(firebaseConfig)
 
+export default fireDb.database().ref();

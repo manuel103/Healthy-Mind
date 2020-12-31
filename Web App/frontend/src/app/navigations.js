@@ -1,7 +1,7 @@
 export const navigations = [
   {
     name: "Dashboard",
-    path: "/dashboard/analytics",
+    path: "/dashboard/patients",
     icon: "dashboard"
   },
   // {
@@ -57,32 +57,32 @@ export const navigations = [
   //     }
   //   ]
   // },
-  {
-    name: "Utilities",
-    icon: "format_list_bulleted",
-    children: [
-      {
-        name: "Color",
-        path: "/utilities/color",
-        iconText: "C"
-      },
-      {
-        name: "Spacing",
-        path: "/utilities/spacing",
-        iconText: "S"
-      },
-      {
-        name: "Typography",
-        path: "/utilities/typography",
-        iconText: "T"
-      },
-      {
-        name: "Display",
-        path: "/utilities/display",
-        iconText: "D"
-      }
-    ]
-  },
+  // {
+  //   name: "Utilities",
+  //   icon: "format_list_bulleted",
+  //   children: [
+  //     {
+  //       name: "Color",
+  //       path: "/utilities/color",
+  //       iconText: "C"
+  //     },
+  //     {
+  //       name: "Spacing",
+  //       path: "/utilities/spacing",
+  //       iconText: "S"
+  //     },
+  //     {
+  //       name: "Typography",
+  //       path: "/utilities/typography",
+  //       iconText: "T"
+  //     },
+  //     {
+  //       name: "Display",
+  //       path: "/utilities/display",
+  //       iconText: "D"
+  //     }
+  //   ]
+  // },
   // {
   //   name: "Sessions",
   //   icon: "trending_up",

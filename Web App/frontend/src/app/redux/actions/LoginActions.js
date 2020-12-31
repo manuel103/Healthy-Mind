@@ -9,46 +9,46 @@ export const LOGIN_LOADING = "LOGIN_LOADING";
 export const RESET_PASSWORD = "RESET_PASSWORD";
 
 export function loginWithEmailAndPassword({ email, password }) {
-  return dispatch => {
+  return (dispatch) => {
     dispatch({
-      type: LOGIN_LOADING
+      type: LOGIN_LOADING,
     });
 
     jwtAuthService
       .loginWithEmailAndPassword(email, password)
-      .then(user => {
+      .then((user) => {
         dispatch(setUserData(user));
 
         history.push({
-          pathname: "/"
+          pathname: "/",
         });
 
         return dispatch({
-          type: LOGIN_SUCCESS
+          type: LOGIN_SUCCESS,
         });
       })
-      .catch(error => {
+      .catch((error) => {
         return dispatch({
           type: LOGIN_ERROR,
-          payload: error
+          payload: error,
         });
       });
   };
 }
 
 export function resetPassword({ email }) {
-  return dispatch => {
+  return (dispatch) => {
     dispatch({
       payload: email,
-      type: RESET_PASSWORD
+      type: RESET_PASSWORD,
     });
   };
 }
 
 export function firebaseLoginEmailPassword({ email, password }) {
-  return dispatch => {
+  return (dispatch) => {
     FirebaseAuthService.signInWithEmailAndPassword(email, password)
-      .then(user => {
+      .then((user) => {
         if (user) {
           dispatch(
             setUserData({
@@ -59,28 +59,28 @@ export function firebaseLoginEmailPassword({ email, password }) {
               photoURL: "/assets/images/face-7.jpg",
               age: 25,
               token: "faslkhfh423oiu4h4kj432rkj23h432u49ufjaklj423h4jkhkjh",
-              ...user
+              ...user,
             })
           );
 
           history.push({
-            pathname: "/"
+            pathname: "/",
           });
 
           return dispatch({
-            type: LOGIN_SUCCESS
+            type: LOGIN_SUCCESS,
           });
         } else {
           return dispatch({
             type: LOGIN_ERROR,
-            payload: "Login Failed"
+            payload: "Login Failed",
           });
         }
       })
-      .catch(error => {
+      .catch((error) => {
         return dispatch({
           type: LOGIN_ERROR,
-          payload: error
+          payload: error,
         });
       });
   };

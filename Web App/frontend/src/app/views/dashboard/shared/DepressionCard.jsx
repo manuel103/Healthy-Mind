@@ -7,13 +7,12 @@ import { Link } from "react-router-dom";
 import StorageIcon from "@material-ui/icons/Storage";
 import NotInterestedIcon from "@material-ui/icons/NotInterested";
 import RadioButtonCheckedIcon from "@material-ui/icons/RadioButtonChecked";
-import FiberManualRecordIcon from "@material-ui/icons/FiberManualRecord";
 import OfflineBoltIcon from "@material-ui/icons/OfflineBolt";
 import ErrorIcon from "@material-ui/icons/Error";
 import ErrorOutlineIcon from "@material-ui/icons/ErrorOutline";
 import PanoramaFishEyeIcon from "@material-ui/icons/PanoramaFishEye";
-import GaugeChart from "react-gauge-chart";
 import ModifiedAreaChart from "./ModifiedAreaChart";
+import { fireDb } from "../../../services/firebase/firebaseConfig";
 
 const TableCard = () => {
   // ************************Added features**********************************
@@ -24,6 +23,10 @@ const TableCard = () => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const [user, setUser] = useState("");
+  let docPatients = [];
+
+  // const [docPatients, setDocPatients] = useState([]);
 
   // Prediction count variables
   let none_count = 0;
@@ -55,16 +58,34 @@ const TableCard = () => {
   let empty_result_score = "";
   let no_score = "";
 
+  const authListener = () => {
+    fireDb.auth().onAuthStateChanged((user) => {
+      // clearInputs();
+      if (user) {
+        setUser(user);
+      } else {
+        setUser("");
+      }
+    });
+  };
+
+  useEffect(() => {
+    authListener();
+  }, []);
+
   // API Call
   useEffect(() => {
     async function loadPatients() {
       //fetch the patient list
-      const request = await fetch("http://localhost:9000/api/getPatients", {
-        //use the authorization https://www.youtube.com/watch?v=T3Px88x_PsA http://localhost:3000/#/app/main/dashboard
-        // headers: {
-        //   Authorization: "Bearer " + localStorage.getItem("@token"),
-        // },
-      });
+      const request = await fetch(
+        "https://healthymind.herokuapp.com/api/getPatients",
+        {
+          //use the authorization https://www.youtube.com/watch?v=T3Px88x_PsA http://localhost:3000/#/app/main/dashboard
+          // headers: {
+          //   Authorization: "Bearer " + localStorage.getItem("@token"),
+          // },
+        }
+      );
 
       const allPatients = await request.json();
 
@@ -75,6 +96,23 @@ const TableCard = () => {
     //invoke the function
     loadPatients();
   }, []);
+
+
+  patients &&
+    Object.keys(patients).forEach(function (key) {
+      const data = patients[key];
+      // for (element in data) {
+      if (data.docId === user.email) {
+        // console.log(data.docId);
+        docPatients.push(data);
+      }
+
+      // }
+    });
+
+  // console.log(docPatients);
+
+  // console.log("docPatientss",[docPatients])
 
   // Handling @row's data on table click
   const rowEvents = {
@@ -182,13 +220,13 @@ const TableCard = () => {
 
   // Check if the prediction array is empty
   if (
-    none == "" &&
-    normal == "" &&
-    mild == "" &&
-    severe == "" &&
-    moderately_severe == "" &&
-    moderate == "" &&
-    extreme == ""
+    none === "" &&
+    normal === "" &&
+    mild === "" &&
+    severe === "" &&
+    moderately_severe === "" &&
+    moderate === "" &&
+    extreme === ""
   ) {
     empty_result = "No predictions made";
   }
@@ -299,6 +337,13 @@ const TableCard = () => {
                           Total Normal Predictions
                         </h6>
                         <span className="text-secondary">{normal_count}</span>
+                      </li>
+                      <li className="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                        <h6 className="mb-0">
+                          <PanoramaFishEyeIcon className="sideIcon" />
+                          Total Mild Predictions
+                        </h6>
+                        <span className="text-secondary">{mild_count}</span>
                       </li>
                       <li className="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                         <h6 className="mb-0">
@@ -570,7 +615,8 @@ const TableCard = () => {
           hover
           // pagination={paginationFactory()}
           keyField="name"
-          data={patients}
+          loading={true}
+          data={docPatients === undefined ? (docPatients = "No data") : docPatients}
           columns={columns}
           rowEvents={rowEvents}
         />

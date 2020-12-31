@@ -12,6 +12,8 @@ import { Store } from "./redux/Store";
 import Auth from "./auth/Auth";
 import MatxLayout from "./MatxLayout/MatxLayout";
 import AuthGuard from "./auth/AuthGuard";
+// import {userDetails} from "../services/jwtAuthService";
+
 
 const App = () => {
   return (
@@ -22,6 +24,7 @@ const App = () => {
             <Router history={history}>
               <AuthGuard>
                 <MatxLayout />
+                {/* <userDetails /> */}
               </AuthGuard>
             </Router>
           </Auth>

@@ -1,18 +1,19 @@
 package com.example.healthymind.auth;
 
 public class UserHelper {
-    String name, username, email, phoneNo, password;
+    String name, username, email, phoneNo, password, doc_id;
 
     public UserHelper() {
 
     }
 
-    public UserHelper(String name, String username, String email, String phoneNo, String password) {
+    public UserHelper(String name, String username, String email, String phoneNo, String password, String doc_id) {
         this.name = name;
         this.username = username;
         this.email = email;
         this.phoneNo = phoneNo;
         this.password = password;
+        this.doc_id = doc_id;
     }
     public String getName() {
         return name;
@@ -53,4 +54,14 @@ public class UserHelper {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public String getDocId() {
+        return doc_id;
+    }
+
+    public void setDocId(String doc_id) {
+        this.name = doc_id;
+    }
+
+
 }

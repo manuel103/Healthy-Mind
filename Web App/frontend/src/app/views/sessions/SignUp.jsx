@@ -24,7 +24,9 @@ class SignUp extends Component {
     });
   };
 
-  handleFormSubmit = event => {};
+  handleFormSubmit = event => {
+    console.log(this.state)
+  };
   render() {
     let { username, email, password } = this.state;
     return (

@@ -17,6 +17,10 @@ import { isMdScreen } from "utils";
 import NotificationBar from "../SharedCompoents/NotificationBar";
 import { Link } from "react-router-dom";
 import ShoppingCart from "../SharedCompoents/ShoppingCart";
+import FirebaseConfig from "../../../app/services/firebase/firebaseConfig";
+import { fireDb } from "../../services/firebase/firebaseConfig";
+
+
 
 const styles = theme => ({
   root: {
@@ -55,9 +59,14 @@ class Layout1Topbar extends Component {
     this.updateSidebarMode({ mode });
   };
 
-  handleSignOut = () => {
+  // handleSignOut = () => {
+  //   this.props.logoutUser();
+  // };
+
+  handleLogOut = () => {
+    fireDb.auth().signOut();
     this.props.logoutUser();
-  };
+  }
 
   render() {
     let { theme, settings, className, style } = this.props;
@@ -68,15 +77,22 @@ class Layout1Topbar extends Component {
         <div className="topbar">
           <div
             className={`topbar-hold ${className}`}
-            style={Object.assign({}, { backgroundColor: topbarTheme.palette.primary.main }, style)}
+            style={Object.assign(
+              {},
+              { backgroundColor: topbarTheme.palette.primary.main },
+              style
+            )}
           >
             <div className="flex flex-space-between flex-middle h-100">
               <div className="flex">
-                <IconButton onClick={this.handleSidebarToggle} className="hide-on-lg">
+                <IconButton
+                  onClick={this.handleSidebarToggle}
+                  className="hide-on-lg"
+                >
                   <Icon>menu</Icon>
                 </IconButton>
 
-                <div className="hide-on-mobile">
+                {/* <div className="hide-on-mobile">
                   <IconButton>
                     <Icon>mail_outline</Icon>
                   </IconButton>
@@ -88,14 +104,14 @@ class Layout1Topbar extends Component {
                   <IconButton>
                     <Icon>star_outline</Icon>
                   </IconButton>
-                </div>
+                </div> */}
               </div>
               <div className="flex flex-middle">
                 <MatxSearchBox />
 
-                <NotificationBar />
+                {/* <NotificationBar />
 
-                <ShoppingCart></ShoppingCart>
+                <ShoppingCart></ShoppingCart> */}
 
                 <MatxMenu
                   menuButton={
@@ -106,30 +122,31 @@ class Layout1Topbar extends Component {
                     />
                   }
                 >
-                  <MenuItem style={{ minWidth: 185 }}>
+                  {/* <MenuItem style={{ minWidth: 185 }}>
                     <Link className="flex flex-middle" to="/">
                       <Icon> home </Icon>
                       <span className="pl-16"> Home </span>
                     </Link>
-                  </MenuItem>
+                  </MenuItem> */}
                   <MenuItem style={{ minWidth: 185 }}>
                     <Link
                       className="flex flex-middle"
-                      to="/page-layouts/user-profile"
+                      to="/doctor/profile"
                     >
                       <Icon> person </Icon>
                       <span className="pl-16"> Profile </span>
                     </Link>
                   </MenuItem>
-                  <MenuItem
+                  {/* <MenuItem
                     className="flex flex-middle"
                     style={{ minWidth: 185 }}
                   >
                     <Icon> settings </Icon>
                     <span className="pl-16"> Settings </span>
-                  </MenuItem>
+                  </MenuItem> */}
                   <MenuItem
-                    onClick={this.handleSignOut}
+                    // onClick={this.handleSignOut}
+                    onClick={this.handleLogOut}
                     className="flex flex-middle"
                     style={{ minWidth: 185 }}
                   >

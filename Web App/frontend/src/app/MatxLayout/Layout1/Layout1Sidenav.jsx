@@ -7,13 +7,13 @@ import {
   MenuItem,
   Tooltip,
   IconButton,
-  MuiThemeProvider
+  MuiThemeProvider,
 } from "@material-ui/core";
 
 import { connect } from "react-redux";
 import {
   setLayoutSettings,
-  setDefaultSettings
+  setDefaultSettings,
 } from "app/redux/actions/LayoutActions";
 import { logoutUser } from "app/redux/actions/UserActions";
 import { withRouter } from "react-router-dom";
@@ -22,45 +22,48 @@ import Sidenav from "../SharedCompoents/Sidenav";
 import Brand from "../SharedCompoents/Brand";
 import SidenavTheme from "../MatxTheme/SidenavTheme";
 import { isMdScreen } from "utils";
+import { fireDb } from "../../services/firebase/firebaseConfig";
+import { docName } from "./FetchDoctor";
+import { Link } from "react-router-dom";
 
-const styles = theme => ({});
 
-const IconButtonWhite = withStyles(theme => ({
+const styles = (theme) => ({});
+
+const IconButtonWhite = withStyles((theme) => ({
   root: {
     // color: theme.palette.getContrastText(purple[500]),
     backgroundColor: "transparent",
-    padding: "5px"
-  }
+    padding: "5px",
+  },
 }))(IconButton);
 
 const IconSmall = withStyles(() => ({
   root: {
-    fontSize: "1rem"
-  }
+    fontSize: "1rem",
+  },
 }))(Icon);
 
 class Layout1Sidenav extends Component {
   state = {
     sidenavToggleChecked: false,
+    user: "",
     // hidden: true
   };
 
   componentWillMount() {
-
     // CLOSE SIDENAV ON ROUTE CHANGE ON MOBILE
     this.unlistenRouteChange = this.props.history.listen((location, action) => {
       if (isMdScreen()) {
         this.updateSidebarMode({ mode: "close" });
       }
     });
-
   }
 
   componentWillUnmount() {
     this.unlistenRouteChange();
   }
 
-  updateSidebarMode = sidebarSettings => {
+  updateSidebarMode = (sidebarSettings) => {
     let { settings, setLayoutSettings, setDefaultSettings } = this.props;
     const updatedSettings = {
       ...settings,
@@ -68,9 +71,9 @@ class Layout1Sidenav extends Component {
         ...settings.layout1Settings,
         leftSidebar: {
           ...settings.layout1Settings.leftSidebar,
-          ...sidebarSettings
-        }
-      }
+          ...sidebarSettings,
+        },
+      },
     };
     setLayoutSettings(updatedSettings);
     setDefaultSettings(updatedSettings);
@@ -83,7 +86,18 @@ class Layout1Sidenav extends Component {
     this.setState({ sidenavToggleChecked: !sidenavToggleChecked });
   };
 
+  authListener = () => {
+    fireDb.auth().onAuthStateChanged((user) => {
+      if (user) {
+        this.setState({ user: user });
+      } else {
+        this.setState({ user: "" });
+      }
+    });
+  };
+
   handleSignOut = () => {
+    fireDb.auth().signOut();
     this.props.logoutUser();
   };
 
@@ -100,19 +114,19 @@ class Layout1Sidenav extends Component {
   );
 
   renderUser = () => {
-    let { user } = this.props;
+    let { user } = this.state.user;
     return (
       <div className="sidenav__user">
         <div className="username-photo">
-          <img src={user.photoURL} alt="user" />
+          {/* <img src={user.photoURL} alt="user" /> */}
         </div>
         <div className="ml-8">
           <span className="username">
             {/* <Icon>lock</Icon> */}
-            {user.displayName}
+            {docName}
           </span>
           <div className="user__menu">
-            <MatxMenu
+            {/* <MatxMenu
               menuButton={
                 <Tooltip title="Settings">
                   <IconButtonWhite
@@ -133,13 +147,16 @@ class Layout1Sidenav extends Component {
                 <Icon> settings </Icon>
                 <span className="pl-16"> Account Setting </span>
               </MenuItem>
-            </MatxMenu>
+            </MatxMenu> */}
 
-            <Tooltip title="Profile">
-              <IconButtonWhite aria-label="Delete" className="" size="small">
-                <IconSmall>person</IconSmall>
-              </IconButtonWhite>
-            </Tooltip>
+            <Link to="/doctor/profile">
+              <Tooltip title="Profile">
+                <IconButtonWhite aria-label="Delete" className="" size="small">
+                  <IconSmall>person</IconSmall>
+                </IconButtonWhite>
+              </Tooltip>
+            </Link>
+
             <Tooltip title="Sign out">
               <IconButtonWhite
                 aria-label="Delete"
@@ -166,12 +183,12 @@ class Layout1Sidenav extends Component {
 
         <div className="sidenav">
           <div className="sidenav__hold">
-            {(
+            {
               <Fragment>
                 {this.renderLogoSwitch()}
                 <Sidenav>{this.renderUser()}</Sidenav>
               </Fragment>
-            )}
+            }
           </div>
         </div>
       </MuiThemeProvider>
@@ -184,15 +201,15 @@ Layout1Sidenav.propTypes = {
   setDefaultSettings: PropTypes.func.isRequired,
   logoutUser: PropTypes.func.isRequired,
   user: PropTypes.object.isRequired,
-  settings: PropTypes.object.isRequired
+  settings: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   setDefaultSettings: PropTypes.func.isRequired,
   setLayoutSettings: PropTypes.func.isRequired,
   logoutUser: PropTypes.func.isRequired,
   user: state.user,
-  settings: state.layout.settings
+  settings: state.layout.settings,
 });
 
 export default withStyles(styles, { withTheme: true })(
@@ -200,7 +217,7 @@ export default withStyles(styles, { withTheme: true })(
     connect(mapStateToProps, {
       setLayoutSettings,
       setDefaultSettings,
-      logoutUser
+      logoutUser,
     })(Layout1Sidenav)
   )
 );

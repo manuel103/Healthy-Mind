@@ -29,23 +29,23 @@ const sessionRoutes = [
   {
     path: "/session/signup",
     component: SignUp,
-    settings
+    settings,
   },
   {
     path: "/session/signin",
     component: SignIn,
-    settings
+    settings,
   },
   {
     path: "/session/forgot-password",
     component: ForgotPassword,
-    settings
+    settings,
   },
   {
     path: "/session/404",
     component: NotFound,
-    settings
-  }
+    settings,
+  },
 ];
 
 export default sessionRoutes;

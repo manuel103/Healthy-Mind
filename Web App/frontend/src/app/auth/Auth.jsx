@@ -9,7 +9,7 @@ import history from "history.js";
 
 class Auth extends Component {
   state = {};
-  
+
   constructor(props) {
     super(props);
 
@@ -17,7 +17,7 @@ class Auth extends Component {
     // This is only for demo purpose
     // You should remove this
     this.props.setUserData(localStorageService.getItem("auth_user"));
-    
+
     // Check current token is valid on page load/reload
     this.checkJwtAuth();
 
@@ -27,26 +27,27 @@ class Auth extends Component {
   checkJwtAuth = () => {
     // You need to send token to your server to check token is valid
     // modify loginWithToken method in jwtService
-    jwtAuthService.loginWithToken().then(user => {
+    jwtAuthService
+      .loginWithToken()
+      .then((user) => {
+        // Valid token
+        // Set user
+        this.props.setUserData(user);
 
-      // Valid token
-      // Set user
-      this.props.setUserData(user);
-
-      // You should redirect user to Dashboard here
-      
-    }).catch(err => {
-      // Invalid token
-      // Ridirect user to sign in page here
-      console.log(err);
-      history.push({
-        pathname: "/session/signin"
+        // You should redirect user to Dashboard here
+      })
+      .catch((err) => {
+        // Invalid token
+        // Ridirect user to sign in page here
+        console.log(err);
+        history.push({
+          pathname: "/session/signin",
+        });
       });
-    });
   };
 
   checkFirebaseAuth = () => {
-    firebaseAuthService.checkAuthStatus(user => {
+    firebaseAuthService.checkAuthStatus((user) => {
       if (user) {
         console.log(user.uid);
         console.log(user.email);
@@ -63,12 +64,9 @@ class Auth extends Component {
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   setUserData: PropTypes.func.isRequired,
-  login: state.login
+  login: state.login,
 });
 
-export default connect(
-  mapStateToProps,
-  { setUserData }
-)(Auth);
+export default connect(mapStateToProps, { setUserData })(Auth);

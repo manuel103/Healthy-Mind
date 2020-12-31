@@ -12,7 +12,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.healthymind.R;
-import com.example.healthymind.ui.profile.ProfileActivity;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -21,7 +20,7 @@ import java.security.MessageDigest;
 
  public class SignupActivity extends AppCompatActivity {
 
-    TextInputLayout regName, regUsername, regEmail, regPhone, regPassword;
+    TextInputLayout regName, regUsername, regEmail, regPhone, regPassword, docId;
     Button regBtn;
     TextView callLogin;
     FirebaseDatabase rootNode;
@@ -42,6 +41,7 @@ import java.security.MessageDigest;
         regEmail = findViewById(R.id.email);
         regPhone = findViewById(R.id.phoneNo);
         regPassword = findViewById(R.id.password);
+        docId = findViewById(R.id.doctor_id);
         regBtn = findViewById(R.id.sign_up);
         register_progressbar = findViewById(R.id.register_progress_bar);
         progressbar_layout_register = findViewById(R.id.progressbar_layout_register);
@@ -57,7 +57,7 @@ import java.security.MessageDigest;
                 rootNode = FirebaseDatabase.getInstance();
                 reference = rootNode.getReference("patients");
 
-                if (!validateName() | !validateUsername() | !validateEmail() | !validatePhone() | !validatePassword()) {
+                if (!validateName() | !validateUsername() | !validateEmail() | !validatePhone() | !validatePassword() | !validateDoctorId()) {
                     return;
                 }
 
@@ -66,11 +66,13 @@ import java.security.MessageDigest;
                 String email = regEmail.getEditText().getText().toString();
                 String phoneNo = regPhone.getEditText().getText().toString();
                 String password = regPassword.getEditText().getText().toString();
+                String doc_id = docId.getEditText().getText().toString();
+
 
                 String newPass =  sha256(password);
 
 
-                UserHelper helper = new UserHelper(name, username, email, phoneNo, newPass);
+                UserHelper helper = new UserHelper(name, username, email, phoneNo, newPass, doc_id);
                 reference.child(username).setValue(helper);
 
                 progressbar_layout_register.setVisibility(View.VISIBLE);
@@ -196,4 +198,21 @@ import java.security.MessageDigest;
             return true;
         }
     }
+
+     private Boolean validateDoctorId() {
+         String val = docId.getEditText().getText().toString();
+         String noWhiteSpace = "\\A\\w{4,20}\\z";
+
+         if (val.isEmpty()) {
+
+             progressbar_layout_register.setVisibility(View.GONE);
+             register_progressbar.setVisibility(View.GONE);
+             docId.setError("Doctor Id is required");
+             return false;
+         } else {
+             docId.setError(null);
+             docId.setErrorEnabled(false);
+             return true;
+         }
+     }
 }

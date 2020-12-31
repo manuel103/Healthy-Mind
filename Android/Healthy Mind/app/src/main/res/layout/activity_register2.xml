@@ -100,6 +100,18 @@
                     android:maxLines="1" />
             </com.google.android.material.textfield.TextInputLayout>
 
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/doctor_id"
+                style="@style/parent.TextLayout"
+                android:layout_marginTop="@dimen/signup_text_margin_top">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    style="@style/modifiedEditText"
+                    android:hint="Doctor Id"
+                    android:inputType="text"
+                    android:maxLines="1" />
+            </com.google.android.material.textfield.TextInputLayout>
+
             <Button
                 android:id="@+id/sign_up"
                 android:layout_width="match_parent"

@@ -1,15 +1,20 @@
 import React, { Component, useState, useEffect } from "react";
 import { Grid, Card, Icon, Fab } from "@material-ui/core";
+import { fireDb } from "../../../services/firebase/firebaseConfig";
 
 const StatCards2 = () => {
   const [patients, setPatients] = useState([]);
+  const [user, setUser] = useState("");
+  let docPatients = []
+
 
   useEffect(() => {
     async function loadPatients() {
       //fetch the patient list
-      const request = await fetch("http://localhost:9000/api/getPatients", {
-
-      });
+      const request = await fetch(
+        "https://healthymind.herokuapp.com/api/getPatients",
+        {}
+      );
 
       const allPatients = await request.json();
 
@@ -23,7 +28,31 @@ const StatCards2 = () => {
     loadPatients();
   }, []);
 
-  let total_patients = patients.length;
+    const authListener = () => {
+    fireDb.auth().onAuthStateChanged((user) => {
+      // clearInputs();
+      if (user) {
+        setUser(user);
+      } else {
+        setUser("");
+      }
+    });
+  };
+
+  useEffect(() => {
+    authListener();
+  }, []);
+
+    patients &&
+    Object.keys(patients).forEach(function (key) {
+      const data = patients[key];
+      if (data.docId == user.email) {
+        // console.log(data);
+        docPatients.push(data)
+      }
+    });
+
+  let total_patients = docPatients.length;
   let perc_increase = (((total_patients-(total_patients-1)) / (total_patients-1)) * 100).toFixed(
     2
   );
@@ -44,7 +73,9 @@ const StatCards2 = () => {
             </h5>
           </div>
           <div className="pt-16 flex flex-middle">
-            <h2 className="m-0 text-muted flex-grow-1">{total_patients}</h2>
+            <h2 className="m-0 text-muted flex-grow-1">
+              {total_patients === 0 ? <h6>No patients available</h6> : total_patients}
+            </h2>
             <div className="ml-12 small-circle bg-green text-white">
               <Icon className="small-icon">expand_less</Icon>
             </div>
@@ -55,9 +86,7 @@ const StatCards2 = () => {
           </div>
         </Card>
       </Grid>
-      <Grid item xs={12} md={6}>
-        
-      </Grid>
+      <Grid item xs={12} md={6}></Grid>
     </Grid>
   );
 };
