@@ -27,7 +27,8 @@ Firebase.initializeApp({
 });
 
 const db = Firebase.database();
-const usersRef = db.ref("patients");
+const patientsRef = db.ref("patients");
+const doctorsRef = db.ref("doctors");
 
 // const FirebaseRef = new Firebase("https://dl4ddoa.firebaseio.com");
 
@@ -57,7 +58,7 @@ app.post("/api/createPatient", function (req, res) {
 
   const data = req.body;
 
-  usersRef.push(data, function (err) {
+  patientsRef.push(data, function (err) {
     if (err) {
       res.send(err);
     } else {
@@ -76,11 +77,11 @@ app.put("/api/updatePatient", function (req, res) {
 
   const data = req.body;
 
-  usersRef.child(uid).update(data, function (err) {
+  patientsRef.child(uid).update(data, function (err) {
     if (err) {
       res.send(err);
     } else {
-      usersRef.child("uid").once("value", function (snapshot) {
+      patientsRef.child("uid").once("value", function (snapshot) {
         if (snapshot.val() == null) {
           res.json({ message: "Error: No user found", result: false });
         } else {
@@ -99,7 +100,7 @@ app.put("/api/updatePatient", function (req, res) {
 app.delete("/api/removePatient", function (req, res) {
   const uid = "tr";
 
-  usersRef.child(uid).remove(function (err) {
+  patientsRef.child(uid).remove(function (err) {
     if (err) {
       res.send(err);
     } else {
@@ -112,12 +113,7 @@ app.delete("/api/removePatient", function (req, res) {
 app.get("/api/getPatients", function (req, res) {
   // const uid = "-MLl_ERoxyFyBNkykkRx";
 
-  // const x = []
-
-  // if (uid.length != 20) {
-  //   res.json({ message: "Error: uid must be 20 characters long." });
-  // } else {
-  usersRef.once("value", function (snapshot) {
+  patientsRef.once("value", function (snapshot) {
     //console.log(snapshot);
 
     if (snapshot.val() == null) {
@@ -134,12 +130,32 @@ app.get("/api/getPatients", function (req, res) {
   //  }
 });
 
+app.get("/api/getDoctors", function (req, res) {
+  // const uid = "-MLl_ERoxyFyBNkykkRx";
+
+  doctorsRef.once("value", function (snapshot) {
+    //console.log(snapshot);
+
+    if (snapshot.val() == null) {
+      res.json({ message: "Error: No user found", result: false });
+    } else {
+      const result = snapshot.val();
+      res.json({
+        // message: "successfully fetched data",
+        // result: true,
+        doctors: Object.values(result),
+      });
+    }
+  });
+  //  }
+});
+
 // Get patient depression results
 app.get("/api/getdepressionResults", function (req, res) {
 
   const username = req.username
 
-  usersRef.child(username).once("value", function (snapshot) {
+  patientsRef.child(username).once("value", function (snapshot) {
     if (snapshot.val() == null) {
       res.json({ message: "Error: No results found", result: false });
     } else {
@@ -155,7 +171,7 @@ app.get("/api/getdepressionResults", function (req, res) {
     }
   });
 
-  // usersRef.once("value", function (snapshot) {
+  // patientsRef.once("value", function (snapshot) {
   //   snapshot.forEach(function (userSnapshot) {
   //     var blogs = userSnapshot.val().depression_levels;
   //     console.log(blogs);
@@ -169,7 +185,7 @@ app.get("/api/getdepressionResults", function (req, res) {
 });
 
 // login
-app.post("/api/login", (req, res) => {
+app.post("/session/login", (req, res) => {
   // Get the ID token passed and the CSRF token.
   const idToken = req.body.idToken.toString();
   const csrfToken = req.body.csrfToken.toString();
