@@ -3,6 +3,8 @@ import { fireDb } from "../../services/firebase/firebaseConfig";
 import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 import { Button, Icon, Grid } from "@material-ui/core";
 
+export let handleInputChange;
+
 const ProfileForm = (props) => {
   const [user, setUser] = useState("");
 
@@ -36,12 +38,13 @@ const ProfileForm = (props) => {
   //       });
   //   }, [props.currentId, props.contactObjects]);
 
-  const handleInputChange = (e) => {
+  handleInputChange = (e) => {
     var { name, value } = e.target;
     setValues({
       ...values,
       [name]: value,
       email: user.email,
+      docId: user.email,
     });
   };
 
@@ -97,6 +100,7 @@ const ProfileForm = (props) => {
                 value={user.email}
                 disabled="disabled"
               />
+              
               <label>Id</label>
               <TextValidator
                 className="mb-16 w-100"

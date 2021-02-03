@@ -46,12 +46,10 @@ const DoughnutChart = ({ height, color = [], theme }) => {
 
 
   let none_count = 0;
-  let normal_count = 0;
   let mild_count = 0;
   let moderate_count = 0;
   let moderatelySevere_count = 0;
   let severe_count = 0;
-  let extreme_count = 0;
   let docPatients = [];
 
   patients &&
@@ -69,18 +67,14 @@ const DoughnutChart = ({ height, color = [], theme }) => {
 
         if (depression_levels == "none") {
           none_count += 1;
-        } else if (depression_levels == "normal") {
-          normal_count += 1;
         } else if (depression_levels == "mild") {
           mild_count += 1;
         } else if (depression_levels == "severe") {
           severe_count += 1;
         } else if (depression_levels == "moderately severe") {
           moderatelySevere_count += 1;
-        } else if (depression_levels == "moderate") {
-          moderate_count += 1;
         } else {
-          extreme_count += 1;
+          moderate_count += 1;
         }
       });
   });
@@ -164,10 +158,6 @@ const DoughnutChart = ({ height, color = [], theme }) => {
             name: "None",
           },
           {
-            value: normal_count,
-            name: "Normal",
-          },
-          {
             value: mild_count,
             name: "Mild",
           },
@@ -182,11 +172,7 @@ const DoughnutChart = ({ height, color = [], theme }) => {
           {
             value: severe_count,
             name: "Severe",
-          },
-          {
-            value: extreme_count,
-            name: "Extreme",
-          },
+          }
         ],
         itemStyle: {
           emphasis: {

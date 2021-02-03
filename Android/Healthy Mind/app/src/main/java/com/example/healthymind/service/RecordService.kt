@@ -194,7 +194,7 @@ class RecordService : Service() {
 
 
         //Code to transform the probability predictions into label values
-        val ASSOCIATED_AXIS_LABELS = "labels2.txt"
+        val ASSOCIATED_AXIS_LABELS = "labels.txt"
         var associatedAxisLabels: List<String?>? = null
         try {
             associatedAxisLabels = FileUtil.loadLabels(this, ASSOCIATED_AXIS_LABELS)

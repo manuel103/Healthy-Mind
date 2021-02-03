@@ -17,7 +17,7 @@
             android:orientation="vertical">
 
             <ImageView
-                android:layout_width="230dp"
+                android:layout_width="250dp"
                 android:layout_height="230dp"
                 android:layout_marginLeft="60dp"
                 android:layout_marginRight="60dp"
@@ -82,7 +82,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     style="@style/modifiedEditText"
                     android:hint="Phone Number"
-                    android:inputType="textEmailAddress"
+                    android:inputType="number"
                     android:maxLines="1" />
             </com.google.android.material.textfield.TextInputLayout>
 

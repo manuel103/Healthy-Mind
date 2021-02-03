@@ -1,5 +1,8 @@
-none,
-mild,
-moderate,
-moderately severe,
+none
+mild
+moderate
+moderately severe
 severe
+none
+mild
+moderate

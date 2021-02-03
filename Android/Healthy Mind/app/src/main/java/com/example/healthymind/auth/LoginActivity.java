@@ -181,7 +181,7 @@ public class LoginActivity extends AppCompatActivity {
             sessionManager.createRememberMeSession(userEnteredUsername, newPass);
 
         }
-//        Check if user exists in DB
+       // Check if user exists in DB
         Query checkUser = reference.orderByChild("username").equalTo(userEnteredUsername);
         checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

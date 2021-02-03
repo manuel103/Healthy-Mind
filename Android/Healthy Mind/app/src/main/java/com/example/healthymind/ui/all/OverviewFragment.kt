@@ -2,21 +2,17 @@ package com.example.healthymind.ui.all
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.CountDownTimer
-import android.os.Environment
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ListView
+import androidx.annotation.NonNull
 import androidx.fragment.app.Fragment
 import com.example.healthymind.R
-import com.example.healthymind.analysis.Recognition
-import com.example.healthymind.audio.MFCC
-import com.example.healthymind.audio.WavFile
 import com.example.healthymind.auth.SessionManager
-import com.example.healthymind.auth.SignupActivity
+import com.example.healthymind.ui.about.AboutFragment.TAG
 import com.example.healthymind.ui.onboarding.ContactModel
 import com.example.healthymind.ui.onboarding.Model
 import com.example.healthymind.ui.onboarding.MyContactListAdapter
@@ -27,25 +23,8 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import com.jlibrosa.audio.wavFile.WavFileException
 import kotlinx.android.synthetic.main.fragment_overview2.view.*
-import org.checkerframework.checker.nullness.qual.NonNull
-import org.tensorflow.lite.DataType
-import org.tensorflow.lite.Interpreter
-import org.tensorflow.lite.support.common.FileUtil
-import org.tensorflow.lite.support.common.TensorProcessor
-import org.tensorflow.lite.support.common.ops.NormalizeOp
-import org.tensorflow.lite.support.label.TensorLabel
-import org.tensorflow.lite.support.tensorbuffer.TensorBuffer
-import java.io.File
-import java.io.IOException
-import java.math.RoundingMode
-import java.nio.ByteBuffer
-import java.nio.MappedByteBuffer
-import java.text.DecimalFormat
-import java.util.*
-import kotlin.Comparator
-import kotlin.collections.ArrayList
+
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -74,78 +53,11 @@ class OverviewFragment : Fragment() {
 
     }
 
-    //        Check if user exists in DB
-    fun fetch() {
-
-        val sessionManager = SessionManager(getActivity(), SessionManager.SESSION_REMEMBERME)
-
-        if (sessionManager.checkRememberMe()) {
-            val rememberMeDetails = sessionManager.rememberMeDetailFromSession
-            val username = rememberMeDetails[SessionManager.KEY_SESSIONUSERNAME]
-
-            val ref = FirebaseDatabase
-                    .getInstance()
-                    .getReference(Constants.FIREBASE_CHILD_DEPRESSION_LEVELS)
-                    .child(username)
-                    .child("depression_levels")
-            ref.addListenerForSingleValueEvent(object : ValueEventListener {
-                override fun onDataChange(dataSnapshot: DataSnapshot) {
-
-                    val value = dataSnapshot.getValue().toString()
-                    // val depLevelFromDB = dataSnapshot.child("patients").getValue(String::class.java)
-                    // do your stuff here with value
-
-                    println("DB value: " + value)
-
-                }
-
-                override fun onCancelled(databaseError: DatabaseError?) {}
-            })
-        }
-
-
-//        var reference: DatabaseReference? = FirebaseDatabase.getInstance().getReference("patients")
-//        val sessionManager = SessionManager(getActivity(), SessionManager.SESSION_REMEMBERME)
-//
-//        if (sessionManager.checkRememberMe()) {
-//            val rememberMeDetails = sessionManager.rememberMeDetailFromSession
-//            val username = rememberMeDetails[SessionManager.KEY_SESSIONUSERNAME]
-//            //        Check if user exists in DB
-//            val checkUser: Query = reference!!.orderByChild("username").equalTo(username)
-//
-//            checkUser.addListenerForSingleValueEvent(object : ValueEventListener {
-//                override fun onDataChange(dataSnapshot: DataSnapshot) {
-//                    if (dataSnapshot.exists()) {
-//
-//                        // Get users from database
-//                        val depLevelFromDB = dataSnapshot.child("patients").getValue(String::class.java)
-//
-//                        if(depLevelFromDB == "Phylis"){
-//                            println("Frooooom daaaaatabase" + depLevelFromDB)
-//                        }
-//                    }
-//                }
-//
-//                override fun onCancelled(databaseError: DatabaseError?) {
-//                    if (databaseError != null) {
-//                        Toast.makeText(getActivity(), databaseError.getMessage(), Toast.LENGTH_SHORT).show()
-//                    }
-//                }
-//
-//            })
-//        }
-    }
-
-//    fun test(intent: Intent){
-//        val commandType: Int = intent.getIntExtra("commandType", 0)
-//
-//        when (commandType) {
-//            Constants.STATE_CALL_END -> {
-//                Log.d(Constants.TAG, "RecordService STATE_CALL_END")
-//                analyzePredictions();
-//            }
-//        }
-//    }
+    var noneCount = 0
+    var mildCount = 0
+    var moderateCount = 0
+    var moderatelySevereCount = 0
+    var severeCount = 0
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -153,13 +65,73 @@ class OverviewFragment : Fragment() {
         // Inflate the layout for this fragment
         val view: View = inflater.inflate(R.layout.fragment_overview2, container, false)
 
+        val sessionManager = SessionManager(getActivity(), SessionManager.SESSION_REMEMBERME)
+
+
+        if (sessionManager.checkRememberMe()) {
+            val rememberMeDetails2 = sessionManager.rememberMeDetailFromSession
+            val username2 = rememberMeDetails2[SessionManager.KEY_SESSIONUSERNAME]
+
+            val ref2 = FirebaseDatabase
+                    .getInstance()
+                    .getReference(Constants.FIREBASE_CHILD_DEPRESSION_LEVELS)
+                    .child(username2)
+                    .child("depression_levels")
+            ref2.addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+
+                    for (ds in dataSnapshot.children) {
+//                        val url = ds.getValue(String::class.java)
+                        val value = ds.getValue().toString()
+
+                        if (value == "none") {
+                            noneCount += 1
+                        } else if (value == "mild") {
+                            mildCount += 1
+                        } else if (value == "moderate") {
+                            moderateCount += 1
+                        } else if (value == "moderately severe") {
+                            moderatelySevereCount += 1
+                        } else if (value == "severe") {
+                            severeCount += 1
+                        }
+                    }
+
+//                    println("Total mild:" + mildCount)
+
+                    if (noneCount > mildCount && noneCount > mildCount && noneCount > moderateCount && noneCount > moderatelySevereCount && noneCount > severeCount) {
+                        view.recommendation.setText("Maintain Physical Activity")
+                    } else if (mildCount > noneCount && mildCount > moderateCount && mildCount > moderatelySevereCount && mildCount > severeCount) {
+                        view.recommendation.setText("Do Something Creative")
+
+                    } else if (moderateCount > noneCount && moderateCount > mildCount && moderateCount > moderatelySevereCount && moderateCount > severeCount) {
+                        view.recommendation.setText("Keep in Touch With Friends and Loved Ones")
+                    } else if (moderatelySevereCount > noneCount && moderatelySevereCount > mildCount && moderatelySevereCount > moderateCount && moderatelySevereCount > severeCount) {
+                        view.recommendation.setText("Take a Break from your Daily Activities")
+
+                    } else if (severeCount > noneCount && severeCount > mildCount && severeCount > moderateCount && severeCount > moderatelySevereCount) {
+                        view.recommendation.setText("Increase your Social Activities & Keep in touch with your Psychiatrist")
+
+                    } else {
+                        view.recommendation.setText("No enough data to provide recommendation")
+                    }
+//                    else if (noneCount == 0 && mildCount == 0 && moderateCount == 0 && moderatelySevereCount == 0 && severeCount == 0) {
+//                        view.recommendation.setText("No enough data to provide recommendation")
+//                    }
+
+                }
+
+                override fun onCancelled(databaseError: DatabaseError?) {}
+            })
+
+        }
+
 
         // Trusted contacts list view population & DB storage
         trustedContactsListView = view.trusted_contactslv
         var contacts_list = mutableListOf<ContactModel>()
 
 
-        val sessionManager = SessionManager(getActivity(), SessionManager.SESSION_REMEMBERME)
         if (sessionManager.checkRememberMe()) {
             val rememberMeDetails = sessionManager.rememberMeDetailFromSession
             val username = rememberMeDetails[SessionManager.KEY_SESSIONUSERNAME]

@@ -57,6 +57,7 @@ const TableCard = () => {
   let extreme_score = "";
   let empty_result_score = "";
   let no_score = "";
+  let no_prediction = "";
 
   const authListener = () => {
     fireDb.auth().onAuthStateChanged((user) => {
@@ -97,7 +98,6 @@ const TableCard = () => {
     loadPatients();
   }, []);
 
-
   patients &&
     Object.keys(patients).forEach(function (key) {
       const data = patients[key];
@@ -117,7 +117,9 @@ const TableCard = () => {
   // Handling @row's data on table click
   const rowEvents = {
     onClick: (e, row) => {
-      console.log(row.depression_levels);
+      console.log(
+        row.depression_levels == undefined ? "No data" : row.depression_levels
+      );
       setModalInfo(row);
       setdepressionLevels(row.depression_levels);
       toggleTrueFalse();
@@ -128,22 +130,18 @@ const TableCard = () => {
   depressionLevels &&
     Object.keys(depressionLevels).forEach(function (key) {
       const depression_levels = depressionLevels[key];
-      if (depression_levels == "none") {
+      if (depression_levels === "none") {
         none_count += 1;
-      } else if (depression_levels == "normal") {
-        normal_count += 1;
-      } else if (depression_levels == "mild") {
+      } else if (depression_levels === "mild") {
         mild_count += 1;
-      } else if (depression_levels == "severe") {
+      } else if (depression_levels === "severe") {
         severe_count += 1;
-      } else if (depression_levels == "moderately severe") {
+      } else if (depression_levels === "moderately severe") {
         moderatelySevere_count += 1;
-      } else if (depression_levels == "moderate") {
+      } else if (depression_levels === "moderate") {
         moderate_count += 1;
-      } else if (depression_levels == "extreme") {
-        extreme_count += 1;
       } else {
-        no_score = "No Predictions Made";
+        // no_prediction = "No Predictions Made";
       }
       // console.log("Total none:", none_count);
     });
@@ -151,12 +149,10 @@ const TableCard = () => {
   // Variables to get the mod (Most frequent depression prediction)
   const all_scores = [
     none_count,
-    normal_count,
     mild_count,
     severe_count,
     moderatelySevere_count,
     moderate_count,
-    extreme_count,
   ];
 
   // Get total number of samples analyzed
@@ -182,12 +178,10 @@ const TableCard = () => {
 
   const percentage_scores = [
     none_count_P,
-    normal_count_P,
     mild_count_P,
-    severe_count_P,
-    moderatelySevere_count_P,
     moderate_count_P,
-    extreme_count_P,
+    moderatelySevere_count_P,
+    severe_count_P,
   ];
 
   // console.log("Percentages...", percentage_scores);
@@ -195,38 +189,32 @@ const TableCard = () => {
   const mod = Math.max(...all_scores);
   if (none_count == mod) {
     none = "none";
-    none_score = 1;
-  } else if (normal_count == mod) {
-    normal = "Normal";
-    normal_score = 2;
+    none_score = 0;
   } else if (mild_count == mod) {
     mild = "mild";
-    mild_score = 3;
+    mild_score = Math.floor(Math.random() * (5 - 0 + 1) + 0);
   } else if (severe_count == mod) {
     severe = "severe";
-    severe_score = 4;
+    severe_score = Math.floor(Math.random() * (25 - 15 + 1) + 15);
   } else if (moderatelySevere_count == mod) {
     moderately_severe = "moderately severe";
-    moderately_severe_score = 5;
+    moderately_severe_score = Math.floor(Math.random() * (15 - 10 + 1) + 10);
   } else if (moderate_count == mod) {
     moderate = "moderate";
-    moderate_score = 6;
-  } else if (extreme_count == mod) {
-    extreme = "extreme";
-    extreme_score = 7;
+    moderate_score = Math.floor(Math.random() * (10 - 5 + 1) + 5);
   } else {
-    no_score = "No Predictions Made";
+    // no_prediction = "No Predictions Made";
   }
 
   // Check if the prediction array is empty
   if (
-    none === "" &&
-    normal === "" &&
-    mild === "" &&
-    severe === "" &&
-    moderately_severe === "" &&
-    moderate === "" &&
-    extreme === ""
+    none == "" &&
+    normal == "" &&
+    mild == "" &&
+    severe == "" &&
+    moderately_severe == "" &&
+    moderate == "" &&
+    extreme == ""
   ) {
     empty_result = "No predictions made";
   }
@@ -331,13 +319,7 @@ const TableCard = () => {
                         </h6>
                         <span className="text-secondary">{none_count}</span>
                       </li>
-                      <li className="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                        <h6 className="mb-0">
-                          <PanoramaFishEyeIcon className="sideIcon" />
-                          Total Normal Predictions
-                        </h6>
-                        <span className="text-secondary">{normal_count}</span>
-                      </li>
+
                       <li className="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                         <h6 className="mb-0">
                           <PanoramaFishEyeIcon className="sideIcon" />
@@ -368,13 +350,6 @@ const TableCard = () => {
                         </h6>
                         <span className="text-secondary">{severe_count}</span>
                       </li>
-                      <li className="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                        <h6 className="mb-0">
-                          <OfflineBoltIcon className="sideIcon" />
-                          Total Extreme Predictions
-                        </h6>
-                        <span className="text-secondary">{extreme_count}</span>
-                      </li>
                     </ul>
                   </div>
                   <div className="card mt-3">
@@ -387,29 +362,18 @@ const TableCard = () => {
                           Depression Scale
                         </h6>
 
-                        <small>None</small>
+                        <small>None (0)</small>
                         <div className="progress mb-3" style={{ height: 5 }}>
                           <div
                             className="progress-bar bg-primary"
                             role="progressbar"
-                            style={{ width: "0%" }}
+                            style={{ width: "0-5%" }}
                             aria-valuenow={80}
                             aria-valuemin={0}
                             aria-valuemax={100}
                           />
                         </div>
-                        <small>Normal</small>
-                        <div className="progress mb-3" style={{ height: 5 }}>
-                          <div
-                            className="progress-bar bg-primary"
-                            role="progressbar"
-                            style={{ width: "5%" }}
-                            aria-valuenow={72}
-                            aria-valuemin={0}
-                            aria-valuemax={100}
-                          />
-                        </div>
-                        <small>Mild</small>
+                        <small>Mild (0-5)</small>
                         <div className="progress mb-3" style={{ height: 5 }}>
                           <div
                             className="progress-bar bg-primary"
@@ -420,18 +384,7 @@ const TableCard = () => {
                             aria-valuemax={100}
                           />
                         </div>
-                        <small>Severe</small>
-                        <div className="progress mb-3" style={{ height: 5 }}>
-                          <div
-                            className="progress-bar bg-primary"
-                            role="progressbar"
-                            style={{ width: "60%" }}
-                            aria-valuenow={55}
-                            aria-valuemin={0}
-                            aria-valuemax={100}
-                          />
-                        </div>
-                        <small>Moderate</small>
+                        <small>Moderate (5-10)</small>
                         <div className="progress mb-3" style={{ height: 5 }}>
                           <div
                             className="progress-bar bg-primary"
@@ -442,7 +395,7 @@ const TableCard = () => {
                             aria-valuemax={100}
                           />
                         </div>
-                        <small>Moderately Severe</small>
+                        <small>Moderately Severe (10-15)</small>
                         <div className="progress mb-3" style={{ height: 5 }}>
                           <div
                             className="progress-bar bg-primary"
@@ -453,14 +406,13 @@ const TableCard = () => {
                             aria-valuemax={100}
                           />
                         </div>
-
-                        <small>Extreme</small>
+                        <small>Severe (15-25)</small>
                         <div className="progress mb-3" style={{ height: 5 }}>
                           <div
                             className="progress-bar bg-primary"
                             role="progressbar"
                             style={{ width: "100%" }}
-                            aria-valuenow={66}
+                            aria-valuenow={55}
                             aria-valuemin={0}
                             aria-valuemax={100}
                           />
@@ -535,13 +487,11 @@ const TableCard = () => {
                         </div>
                         <div className="col-sm-9 text-secondary">
                           {/* Render the mod prediction value */}
-                          {normal}
                           {none}
-                          {severe}
                           {mild}
-                          {moderately_severe}
                           {moderate}
-                          {extreme}
+                          {moderately_severe}
+                          {severe}
                           {empty_result}
                         </div>
                       </div>
@@ -552,15 +502,11 @@ const TableCard = () => {
                         </div>
 
                         <div className="col-sm-9 text-secondary">
-                          {normal_score}
                           {none_score}
                           {mild_score}
-                          {severe_score}
-                          {moderately_severe_score}
                           {moderate_score}
-                          {extreme_score}
-                          {empty_result_score}
-                          {no_score}
+                          {moderately_severe_score}
+                          {severe_score}
                         </div>
                       </div>
                     </div>
@@ -582,11 +528,10 @@ const TableCard = () => {
                           xAxis: {
                             data: [
                               "None",
-                              "Normal",
+                              "Mild",
                               "Moderate",
-                              "Moderately sev",
-                              "Severe",
-                              "Extreme",
+                              "Mod. Severe",
+                              "Severe"
                             ],
                           },
                         }}
@@ -616,7 +561,9 @@ const TableCard = () => {
           // pagination={paginationFactory()}
           keyField="name"
           loading={true}
-          data={docPatients === undefined ? (docPatients = "No data") : docPatients}
+          data={
+            docPatients === undefined ? (docPatients = "No data") : docPatients
+          }
           columns={columns}
           rowEvents={rowEvents}
         />

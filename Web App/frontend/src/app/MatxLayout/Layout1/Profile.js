@@ -23,15 +23,6 @@ const Profile = () => {
     authListener();
   }, []);
 
-  // const email = user.email
-  //    const path = email.replace(/[,.]/g, "")
-
-  // const reff = fireDb
-  //   .database()
-  //   .ref("doctors/" + path + "/fullName");
-
-    // console.log("Refff", reff);
-
   useEffect(() => {
     firebaseDb
       .child("doctors")

@@ -16,6 +16,7 @@ class SignUp extends Component {
     password: "",
     agreement: ""
   };
+  
 
   handleChange = event => {
     event.persist();

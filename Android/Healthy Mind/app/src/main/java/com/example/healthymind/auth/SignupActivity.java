@@ -1,5 +1,6 @@
- package com.example.healthymind.auth;
+package com.example.healthymind.auth;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -13,12 +14,16 @@ import android.widget.Toast;
 
 import com.example.healthymind.R;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import java.security.MessageDigest;
 
- public class SignupActivity extends AppCompatActivity {
+public class SignupActivity extends AppCompatActivity {
 
     TextInputLayout regName, regUsername, regEmail, regPhone, regPassword, docId;
     Button regBtn;
@@ -49,39 +54,19 @@ import java.security.MessageDigest;
         register_progressbar.setVisibility(View.GONE);
 
 
-
         // save data on button click
         regBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                rootNode = FirebaseDatabase.getInstance();
-                reference = rootNode.getReference("patients");
+//                rootNode = FirebaseDatabase.getInstance();
+//                reference = rootNode.getReference("patients");
 
                 if (!validateName() | !validateUsername() | !validateEmail() | !validatePhone() | !validatePassword() | !validateDoctorId()) {
                     return;
+                } else {
+                    isUser();
                 }
 
-                String name = regName.getEditText().getText().toString();
-                String username = regUsername.getEditText().getText().toString();
-                String email = regEmail.getEditText().getText().toString();
-                String phoneNo = regPhone.getEditText().getText().toString();
-                String password = regPassword.getEditText().getText().toString();
-                String doc_id = docId.getEditText().getText().toString();
-
-
-                String newPass =  sha256(password);
-
-
-                UserHelper helper = new UserHelper(name, username, email, phoneNo, newPass, doc_id);
-                reference.child(username).setValue(helper);
-
-                progressbar_layout_register.setVisibility(View.VISIBLE);
-                register_progressbar.setVisibility(View.VISIBLE);
-                Toast.makeText(SignupActivity.this, "Account Created Successfully. Proceed to Login", Toast.LENGTH_LONG).show();
-
-                Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
-                startActivity(intent);
-                finish();
 
             }
 
@@ -98,19 +83,19 @@ import java.security.MessageDigest;
     }
 
     public static String sha256(String base) {
-        try{
+        try {
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
             byte[] hash = digest.digest(base.getBytes("UTF-8"));
             StringBuffer hexString = new StringBuffer();
 
             for (int i = 0; i < hash.length; i++) {
                 String hex = Integer.toHexString(0xff & hash[i]);
-                if(hex.length() == 1) hexString.append('0');
+                if (hex.length() == 1) hexString.append('0');
                 hexString.append(hex);
             }
 
             return hexString.toString();
-        } catch(Exception ex){
+        } catch (Exception ex) {
             throw new RuntimeException(ex);
         }
     }
@@ -199,20 +184,72 @@ import java.security.MessageDigest;
         }
     }
 
-     private Boolean validateDoctorId() {
-         String val = docId.getEditText().getText().toString();
-         String noWhiteSpace = "\\A\\w{4,20}\\z";
+    private Boolean validateDoctorId() {
+        String val = docId.getEditText().getText().toString();
+        String noWhiteSpace = "\\A\\w{4,20}\\z";
 
-         if (val.isEmpty()) {
+        if (val.isEmpty()) {
 
-             progressbar_layout_register.setVisibility(View.GONE);
-             register_progressbar.setVisibility(View.GONE);
-             docId.setError("Doctor Id is required");
-             return false;
-         } else {
-             docId.setError(null);
-             docId.setErrorEnabled(false);
-             return true;
-         }
-     }
+            progressbar_layout_register.setVisibility(View.GONE);
+            register_progressbar.setVisibility(View.GONE);
+            docId.setError("Doctor Id is required");
+            return false;
+        } else {
+            docId.setError(null);
+            docId.setErrorEnabled(false);
+            return true;
+        }
+    }
+
+    private void isUser() {
+        final String userEnteredDocId = docId.getEditText().getText().toString().trim();
+
+        DatabaseReference doctor_reference = FirebaseDatabase.getInstance().getReference("doctors");
+        DatabaseReference patient_reference = FirebaseDatabase.getInstance().getReference("patients");
+
+//        Check if DocId exists in DB
+        Query checkDocId = doctor_reference.orderByChild("docId").equalTo(userEnteredDocId);
+        checkDocId.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    docId.setError(null);
+                    docId.setErrorEnabled(false);
+
+                    String name = regName.getEditText().getText().toString();
+                    String username = regUsername.getEditText().getText().toString();
+                    String email = regEmail.getEditText().getText().toString();
+                    String phoneNo = regPhone.getEditText().getText().toString();
+                    String password = regPassword.getEditText().getText().toString();
+                    String doc_id = docId.getEditText().getText().toString();
+
+                    String newPass = sha256(password);
+
+                    UserHelper helper = new UserHelper(name, username, email, phoneNo, newPass, doc_id);
+                    patient_reference.child(username).setValue(helper);
+
+                    progressbar_layout_register.setVisibility(View.VISIBLE);
+                    register_progressbar.setVisibility(View.VISIBLE);
+                    Toast.makeText(SignupActivity.this, "Account Created Successfully. Proceed to Login", Toast.LENGTH_LONG).show();
+
+                    Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
+                    startActivity(intent);
+                    finish();
+
+                } else {
+                    progressbar_layout_register.setVisibility(View.GONE);
+                    register_progressbar.setVisibility(View.GONE);
+                    docId.setError("Invalid Doctor ID");
+                    docId.requestFocus();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                register_progressbar.setVisibility(View.GONE);
+                Toast.makeText(SignupActivity.this, databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+
+            }
+        });
+    }
 }
