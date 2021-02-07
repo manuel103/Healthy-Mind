@@ -36,9 +36,6 @@
 
 <!--    Home Cards-->
 
-    <style name="TabTextAppearance" parent="TextAppearance.AppCompat.Button">
-    </style>
-
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
@@ -58,61 +55,10 @@
         <item name="android:windowTranslucentNavigation" tools:targetApi="kitkat">true</item>
     </style>
 
-    <style name="AppThemeDark" parent="AppTheme">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorBlack</item>
-        <item name="colorPrimaryDark">@color/colorBlack</item>
-        <item name="colorAccent">@color/colorBlack</item>
-        <!--<item name="android:fontFamily">@font/standard</item>-->
-    </style>
-
-    <style name="toolbar_text" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
-        <!--<item name="android:fontFamily">@font/standard</item>-->
-    </style>
-
-    <style name="tab_text" parent="@android:style/TextAppearance.Widget.TabWidget">
-        <!--<item name="android:fontFamily">@font/standard</item>-->
-    </style>
-
-    <style name="AppTheme.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-    </style>
-
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
-        <!--<item name="android:fontFamily">@font/standard</item>-->
-    </style>
-
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light">
         <!--<item name="android:fontFamily">@font/standard</item>-->
     </style>
     <!--Text View-->
-    <style name="textViewCommon">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:textSize">14sp</item>
-        <item name="android:textColor">@color/colorWhite</item>
-    </style>
-
-    <style name="txt_common">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:textSize">14sp</item>
-        <item name="android:textColor">@color/colorWhite</item>
-        <item name="android:maxLines">1</item>
-    </style>
-
-    <style name="FullscreenTheme" parent="AppTheme">
-        <item name="android:actionBarStyle">@style/FullscreenActionBarStyle</item>
-        <item name="android:windowActionBarOverlay">true</item>
-        <item name="android:windowBackground">@null</item>
-        <item name="metaButtonBarStyle">?android:attr/buttonBarStyle</item>
-        <item name="metaButtonBarButtonStyle">?android:attr/buttonBarButtonStyle</item>
-    </style>
-
-    <style name="FullscreenActionBarStyle" parent="Widget.AppCompat.ActionBar">
-        <item name="android:background">@color/black_overlay</item>
-    </style>
 
     <style name="SCBSwitchTheme" parent="Widget.AppCompat.CompoundButton.Switch"></style>
 
@@ -206,22 +152,7 @@
         <!--</item>-->
     </style>
     <!-- Default App Theme -->
-    <style name="BaseTheme.Default" parent="AppTheme">
-        <!-- Attributes for all APIs -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
-        <item name="dialogTheme">@style/AppTheme.Dialog.Blue</item>
-        <item name="alertDialogTheme">@style/AppTheme.Dialog.Alert.Blue</item>
-    </style>
 
-    <style name="AppTheme.Default" parent="BaseTheme.Default">
-        <!--&lt;!&ndash; API specific attributes 14+ &ndash;&gt;-->
-        <!--<item name="selectableRectDrawableColored">@drawable/state_list_selectable_rect_blue</item>-->
-        <!--<item name="selectableRoundedRectDrawableColored">-->
-        <!--@drawable/state_list_selectable_rounded_rect_blue-->
-        <!--</item>-->
-    </style>
     <!-- Default Dialog Theme -->
     <style name="AppTheme.Dialog" parent="Theme.AppCompat.Light.Dialog"></style>
     <!-- Red Dialog Theme -->
@@ -249,11 +180,6 @@
         <item name="colorAccent">@color/material_blue_a700</item>
     </style>
 
-    <style name="AppTheme.Dialog.Default">
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
-    </style>
     <!-- Default Alert Dialog Theme -->
     <style name="AppTheme.Dialog.Alert" parent="Theme.AppCompat.Light.Dialog.Alert"></style>
     <!-- Red Alert Dialog Theme -->
@@ -280,11 +206,6 @@
         <item name="colorPrimaryDark">@color/material_blue_700</item>
         <item name="colorAccent">@color/material_blue_a700</item>
     </style><!-- Blue Alert Dialog Theme -->
-    <style name="AppTheme.Dialog.Alert.DEFAULT">
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
-    </style>
 
     <style name="AppTheme.AppBar.Dark" parent="ThemeOverlay.AppCompat.Dark.ActionBar"></style>
 </resources>

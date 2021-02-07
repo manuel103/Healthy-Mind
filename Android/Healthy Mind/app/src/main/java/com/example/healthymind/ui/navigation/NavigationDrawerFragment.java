@@ -25,6 +25,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+
 import com.example.healthymind.R;
 import com.example.healthymind.entity.DrawerBean;
 import com.example.healthymind.listener.OnRecyclerViewItemClick;
@@ -81,15 +82,8 @@ public class NavigationDrawerFragment extends Fragment implements OnRecyclerView
         mDrawerBeans.add(new DrawerBean(R.drawable.ic_header, getString(R.string.menu_navigation), ValueConstants.NavigationItemType.Header));
         mDrawerBeans.add(new DrawerBean(R.drawable.ic_trashre, getString(R.string.menu_recycle), ValueConstants.NavigationItemType.Item));
         mDrawerBeans.add(new DrawerBean(R.drawable.ic_setting, getString(R.string.menu_setting), ValueConstants.NavigationItemType.Item));
-        // mDrawerBeans.add(new DrawerBean(R.drawable.ic_email, getString(R.string.menu_mail), ValueConstants.NavigationItemType.Item));
-        // mDrawerBeans.add(new DrawerBean(R.drawable.ic_support, getString(R.string.menu_help), ValueConstants.NavigationItemType.Item));
-        // mDrawerBeans.add(new DrawerBean(R.drawable.ic_rate_me, getString(R.string.menu_rate), ValueConstants.NavigationItemType.Item));
         mDrawerBeans.add(new DrawerBean(R.drawable.ic_about, getString(R.string.menu_about), ValueConstants.NavigationItemType.Item));
-        // mDrawerBeans.add(new DrawerBean(R.drawable.ic_donate, getString(R.string.menu_donate), ValueConstants.NavigationItemType.Item));
-        // mDrawerBeans.add(new DrawerBean(R.drawable.ic_more, getString(R.string.menu_more), ValueConstants.NavigationItemType.Item));
-//        mDrawerBeans.add(new DrawerBean(R.drawable.ic_paint, getString(R.string.menu_paint), ValueConstants.NavigationItemType.Item));
         mDrawerBeans.add(new DrawerBean(R.drawable.ic_exit, getString(R.string.menu_exit), ValueConstants.NavigationItemType.Item));
-        // mDrawerBeans.add(new DrawerBean(R.drawable.ic_power, getString(R.string.menu_power), ValueConstants.NavigationItemType.Item));
 
         mLinearLayoutManager = new LinearLayoutManager(getActivity());
         mNavigationDrawerAdapter = new NavigationDrawerAdapter(getActivity(), mCurrentSelectedPosition);

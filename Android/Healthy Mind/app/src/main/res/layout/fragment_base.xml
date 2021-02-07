@@ -20,7 +20,6 @@
         android:orientation="horizontal">
 
         <ProgressBar
-            android:id="@+id/initialProgressBar"
             style="@android:style/Widget.Holo.ProgressBar.Large"
             android:progressDrawable="@drawable/progress_bar_style"
             android:layout_width="wrap_content"

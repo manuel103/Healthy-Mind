@@ -1,13 +1,13 @@
 <component name="libraryTable">
   <library name="Gradle: com.github.AAChartModel:AAChartCore-Kotlin:-SNAPSHOT@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/04f8e7fad9de6a2aec7f3c5a2b808fe4/jetified-AAChartCore-Kotlin--SNAPSHOT/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/04f8e7fad9de6a2aec7f3c5a2b808fe4/jetified-AAChartCore-Kotlin--SNAPSHOT/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/04f8e7fad9de6a2aec7f3c5a2b808fe4/jetified-AAChartCore-Kotlin--SNAPSHOT/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/921b216282a81f755c341ec4987573ca/jetified-AAChartCore-Kotlin--SNAPSHOT/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/921b216282a81f755c341ec4987573ca/jetified-AAChartCore-Kotlin--SNAPSHOT/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/921b216282a81f755c341ec4987573ca/jetified-AAChartCore-Kotlin--SNAPSHOT/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.AAChartModel/AAChartCore-Kotlin/-SNAPSHOT/951d482b0a2d5ac56c265c6828d6edfa44444dd/AAChartCore-Kotlin--SNAPSHOT-sources.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.AAChartModel/AAChartCore-Kotlin/-SNAPSHOT/18a326963945fbab718c3b207647cb12224e78bc/AAChartCore-Kotlin--SNAPSHOT-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

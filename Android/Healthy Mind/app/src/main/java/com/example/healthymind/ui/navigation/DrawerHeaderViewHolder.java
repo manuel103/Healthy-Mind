@@ -81,7 +81,7 @@ public class DrawerHeaderViewHolder extends BaseViewHolder<DrawerBean> {
         intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         PendingIntent pendingIntent = PendingIntent.getActivity(
                 itemView.getContext(), 0, intent, 0);
-        Bitmap notificationLargeIconBitmap = BitmapFactory.decodeResource(itemView.getContext().getResources(), R.drawable.ic_app);
+        Bitmap notificationLargeIconBitmap = BitmapFactory.decodeResource(itemView.getContext().getResources(), R.drawable.logo_circle);
         notification = new NotificationCompat.Builder(
                 itemView.getContext())
                 .setContentTitle(itemView.getContext().getString(R.string.app_name))
@@ -103,7 +103,7 @@ public class DrawerHeaderViewHolder extends BaseViewHolder<DrawerBean> {
     }
 
     private void onChangeTheme() {
-        theme = MySharedPreferences.getInstance(itemView.getContext()).getInt(MySharedPreferences.KEY_THEMES, R.style.AppTheme_Red);
+        theme = MySharedPreferences.getInstance(itemView.getContext()).getInt(MySharedPreferences.KEY_THEMES, R.style.AppTheme_Blue);
         switch (theme) {
             case R.style.AppTheme_Red:
                 ImageUtil.setImageView(itemView.getContext(), R.drawable.ic_app_red, imageView);
@@ -112,7 +112,7 @@ public class DrawerHeaderViewHolder extends BaseViewHolder<DrawerBean> {
                 ImageUtil.setImageView(itemView.getContext(), R.drawable.ic_app_green, imageView);
                 break;
             case R.style.AppTheme_Blue:
-                ImageUtil.setImageView(itemView.getContext(), R.drawable.ic_app_blue, imageView);
+                ImageUtil.setImageView(itemView.getContext(), R.drawable.logo_circle, imageView);
                 break;
             case R.style.AppTheme_Orange:
                 ImageUtil.setImageView(itemView.getContext(), R.drawable.ic_app_orange, imageView);

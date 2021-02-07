@@ -15,7 +15,6 @@
         android:textColor="@color/colorBlack">
 
         <TextView
-            android:id="@+id/txtTitleLanguage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/spacing_large"
@@ -52,7 +51,6 @@
         android:paddingTop="15dp">
 
         <TextView
-            android:id="@+id/txtTitleTranslation"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginLeft="@dimen/spacing_large"
@@ -64,7 +62,6 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/txtDescriptionTranslation"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginLeft="@dimen/spacing_large"

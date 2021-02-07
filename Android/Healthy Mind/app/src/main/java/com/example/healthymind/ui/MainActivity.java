@@ -185,8 +185,6 @@ public class MainActivity extends BaseActivity
                     if (drawable == null) {
                         drawable = toolbar.getNavigationIcon();
                     }
-//                    toolbar.setNavigationIcon(android.support.v7.appcompat.R.drawable.abc_ic_ab_back_material);
-//                    toolbar.setNavigationIcon(androidx.core.R.drawable.abc_ic_ab_back_material);
                     toolbar.setNavigationOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -214,14 +212,6 @@ public class MainActivity extends BaseActivity
                 return false;
             }
         });
-
-//        SessionManager sessionManager = new SessionManager(MainActivity.this, SessionManager.SESSION_REMEMBERME);
-//        if (sessionManager.checkRememberMe()) {
-//            HashMap<String, String> rememberMeDetails = sessionManager.getRememberMeDetailFromSession();
-//            String username = rememberMeDetails.get(SessionManager.KEY_SESSIONUSERNAME);
-//
-//            Log.d(username, "Is the current logged in user....");
-//        }
 
         return true;
 
@@ -280,108 +270,19 @@ public class MainActivity extends BaseActivity
                 intentSetting.putExtra(Constants.KEY_SCREEN, DetailActivity.KEY_SETTING);
                 startActivity(intentSetting);
                 break;
-//            case 3:
-//                Intent intentSendMail = new Intent(Intent.ACTION_SENDTO);
-//                intentSendMail.setType("text/plain");
-//                intentSendMail.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.email_subject));
-//                intentSendMail.putExtra(Intent.EXTRA_TEXT, getString(R.string.email_body));
-//                intentSendMail.setData(Uri.parse("mailto:harryhaivn@gmail.com"));
-//                intentSendMail.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//                startActivity(intentSendMail);
-//                break;
-//            case 4:
-//                Intent intentHelp = new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=vn.harry.callrecorder"));
-//                startActivity(intentHelp);
-//                break;
-//            case 5:
-//                goApp(true, null);
-//                break;
             case 3:
                 Intent intentAbout = new Intent(getBaseContext(), DetailActivity.class);
                 intentAbout.putExtra(Constants.KEY_SCREEN, DetailActivity.KEY_ABOUT);
                 startActivity(intentAbout);
                 break;
-//            case 7:
-//                Intent intentDonate = new Intent(getBaseContext(), DetailActivity.class);
-//                intentDonate.putExtra(Constants.KEY_SCREEN, DetailActivity.KEY_DONATE);
-//                startActivity(intentDonate);
-//                break;
-//            case 8:
-//                goApp(true, "com.example.healthymind");
-//                break;
-//            case 4:
-//                DialogFragment dialogFragment = SetThemeDialogFragment.newInstance(new MaterialTheme(theme));
-//                DialogUtils.showDialogFragment(getSupportFragmentManager(), dialogFragment);
-//                break;
             case 4:
                 finish();
                 break;
-//            case 11:
-//                break;
             default:
                 break;
         }
         onCloseNavigation();
     }
-
-//    @Override
-//    public void onNavigationDrawerItemSelected(int type, int position) {
-//        switch (position) {
-//            case 0:
-//                break;
-//            case 1:
-//                Intent intentDelete = new Intent(getBaseContext(), DetailActivity.class);
-//                intentDelete.putExtra(Constants.KEY_SCREEN, DetailActivity.KEY_DELETE);
-//                startActivity(intentDelete);
-//                break;
-//            case 2:
-//                Intent intentSetting = new Intent(getBaseContext(), DetailActivity.class);
-//                intentSetting.putExtra(Constants.KEY_SCREEN, DetailActivity.KEY_SETTING);
-//                startActivity(intentSetting);
-//                break;
-//            case 3:
-//                Intent intentSendMail = new Intent(Intent.ACTION_SENDTO);
-//                intentSendMail.setType("text/plain");
-//                intentSendMail.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.email_subject));
-//                intentSendMail.putExtra(Intent.EXTRA_TEXT, getString(R.string.email_body));
-//                intentSendMail.setData(Uri.parse("mailto:harryhaivn@gmail.com"));
-//                intentSendMail.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//                startActivity(intentSendMail);
-//                break;
-//            case 4:
-//                Intent intentHelp = new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=vn.harry.callrecorder"));
-//                startActivity(intentHelp);
-//                break;
-//            case 5:
-//                goApp(true, null);
-//                break;
-//            case 6:
-//                Intent intentAbout = new Intent(getBaseContext(), DetailActivity.class);
-//                intentAbout.putExtra(Constants.KEY_SCREEN, DetailActivity.KEY_ABOUT);
-//                startActivity(intentAbout);
-//                break;
-//            case 7:
-//                Intent intentDonate = new Intent(getBaseContext(), DetailActivity.class);
-//                intentDonate.putExtra(Constants.KEY_SCREEN, DetailActivity.KEY_DONATE);
-//                startActivity(intentDonate);
-//                break;
-//            case 8:
-//                goApp(true, "com.example.healthymind");
-//                break;
-//            case 9:
-//                DialogFragment dialogFragment = SetThemeDialogFragment.newInstance(new MaterialTheme(theme));
-//                DialogUtils.showDialogFragment(getSupportFragmentManager(), dialogFragment);
-//                break;
-//            case 10:
-//                finish();
-//                break;
-//            case 11:
-//                break;
-//            default:
-//                break;
-//        }
-//        onCloseNavigation();
-//    }
 
     public void openDrawer() {
         mDrawerLayout.requestLayout();
@@ -394,38 +295,5 @@ public class MainActivity extends BaseActivity
             mDrawerLayout.closeDrawer(GravityCompat.START);
         }
     }
-
-
-//    public void goApp(boolean googlePlay, String packageName) {//true if Google Play, false if Amazone Store
-//        try {
-//            if (packageName == null) {
-//                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse((googlePlay ? "market://details?id=" : "amzn://apps/android?p=") + getPackageName())));
-//            } else {
-//                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse((googlePlay ? "market://details?id=" : "amzn://apps/android?p=") + packageName)));
-//            }
-//
-//        } catch (ActivityNotFoundException e1) {
-//            try {
-//                if (packageName == null) {
-//                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse((googlePlay ? "http://play.google.com/store/apps/details?id=" : "http://www.amazon.com/gp/mas/dl/android?p=") + getPackageName())));
-//                } else {
-//                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse((googlePlay ? "http://play.google.com/store/apps/details?id=" : "http://www.amazon.com/gp/mas/dl/android?p=") + packageName)));
-//                }
-//            } catch (ActivityNotFoundException e2) {
-//                Toast.makeText(this, getString(R.string.can_openlink), Toast.LENGTH_SHORT).show();
-//            }
-//        }
-//    }
-
-//    private MappedByteBuffer loadModelFile() throws IOException{
-//        AssetFileDescriptor assetFileDescriptor = this.getAssets().openFd("cnn_model.tflite");
-//        FileInputStream fileInputStream = new FileInputStream(assetFileDescriptor.getFileDescriptor());
-//        FileChannel fileChannel = fileInputStream.getChannel();
-//
-//        long startOffset = assetFileDescriptor.getStartOffset();
-//        long length = assetFileDescriptor.getLength();
-//
-//        return  fileChannel.map(FileChannel.MapMode.READ_ONLY, startOffset, length);
-//    }
 
 }

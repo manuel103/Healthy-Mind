@@ -28,7 +28,7 @@ public class SplashActivity extends AwesomeSplash {
 
     @Override
     public void initSplash(ConfigSplash configSplash) {
-        theme = MySharedPreferences.getInstance(this).getInt(MySharedPreferences.KEY_THEMES, R.style.AppTheme_Green);
+        theme = MySharedPreferences.getInstance(this).getInt(MySharedPreferences.KEY_THEMES, R.style.AppTheme_Blue);
         switch (theme) {
             case R.style.AppTheme_Red:
                 configSplash.setBackgroundColor(R.color.material_red_500);

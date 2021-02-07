@@ -23,7 +23,6 @@
         android:padding="16dp">
 
         <ImageView
-            android:id="@+id/back"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:clickable="true"
@@ -349,7 +348,6 @@
                                 app:hintTextAppearance="@style/MyHintStyle">
 
                                 <com.google.android.material.textfield.TextInputEditText
-                                    android:id="@+id/editText_phone"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="20dp"
@@ -381,7 +379,6 @@
                                 app:hintTextAppearance="@style/MyHintStyle">
 
                                 <com.google.android.material.textfield.TextInputEditText
-                                    android:id="@+id/editText_email"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="20dp"
@@ -413,7 +410,6 @@
                                 app:passwordToggleEnabled="true">
 
                                 <com.google.android.material.textfield.TextInputEditText
-                                    android:id="@+id/editText_password"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="20dp"

@@ -41,7 +41,6 @@
                 android:layout_marginTop="@dimen/signup_text_margin_top">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/editTextName"
                     style="@style/modifiedEditText"
                     android:hint="Username"
                     android:inputType="text"
@@ -66,7 +65,6 @@
                 android:layout_marginTop="@dimen/signup_text_margin_top">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/editTextMobile"
                     style="@style/modifiedEditText"
                     android:hint="Email"
                     android:inputType="textEmailAddress"
@@ -93,7 +91,6 @@
                 app:passwordToggleEnabled="true">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/editTextPassword"
                     style="@style/modifiedEditText"
                     android:hint="Password"
                     android:inputType="textPassword"

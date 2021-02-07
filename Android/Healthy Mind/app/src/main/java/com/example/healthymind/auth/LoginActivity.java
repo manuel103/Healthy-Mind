@@ -81,7 +81,7 @@ public class LoginActivity extends AppCompatActivity {
         if (sessionManager.checkRememberMe()) {
             HashMap<String, String> rememberMeDetails = sessionManager.getRememberMeDetailFromSession();
             usernameEditText.setText(rememberMeDetails.get(SessionManager.KEY_SESSIONUSERNAME));
-            passwordEditText.setText(rememberMeDetails.get(SessionManager.KEY_SESSIONPASSWORD));
+//            passwordEditText.setText(rememberMeDetails.get(SessionManager.KEY_SESSIONPASSWORD));
         }
 
         callSignUp.setOnClickListener(new View.OnClickListener() {
