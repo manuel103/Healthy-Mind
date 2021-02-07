@@ -3,7 +3,6 @@ import { withRouter } from "react-router-dom";
 import {
   Icon,
   IconButton,
-  Badge,
   MenuItem,
   withStyles,
   MuiThemeProvider
@@ -14,12 +13,9 @@ import { logoutUser } from "app/redux/actions/UserActions";
 import { PropTypes } from "prop-types";
 import { MatxMenu, MatxSearchBox } from "matx";
 import { isMdScreen } from "utils";
-import NotificationBar from "../SharedCompoents/NotificationBar";
 import { Link } from "react-router-dom";
-import ShoppingCart from "../SharedCompoents/ShoppingCart";
-import FirebaseConfig from "../../../app/services/firebase/firebaseConfig";
 import { fireDb } from "../../services/firebase/firebaseConfig";
-
+import './TopBar.css';
 
 
 const styles = theme => ({

@@ -6,9 +6,10 @@ import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import butterknife.BindView;
 import com.example.healthymind.R;
 import com.example.healthymind.ui.BaseFragment;
+
+import butterknife.BindView;
 
 
 public class PolicyFragment extends BaseFragment {

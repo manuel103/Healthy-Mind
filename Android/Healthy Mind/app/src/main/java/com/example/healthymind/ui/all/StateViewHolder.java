@@ -5,10 +5,11 @@ import android.content.Context;
 import android.view.View;
 import android.widget.TextView;
 
-import butterknife.BindView;
 import com.example.healthymind.R;
 import com.example.healthymind.recycle.viewholder.BaseViewHolder;
 import com.example.healthymind.util.StringUtils;
+
+import butterknife.BindView;
 
 public class StateViewHolder extends BaseViewHolder<Object> {
     public static final int LAYOUT_ID = R.layout.item_header;

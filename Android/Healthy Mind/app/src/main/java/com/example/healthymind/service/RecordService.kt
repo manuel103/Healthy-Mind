@@ -2,36 +2,34 @@ package com.example.healthymind.service
 
 import android.app.Notification
 import android.app.Service
-import androidx.annotation.RequiresApi
-import android.os.Build
-import android.media.MediaRecorder
-import androidx.documentfile.provider.DocumentFile
-import com.example.healthymind.service.WavRecorder
-import com.example.healthymind.ui.all.OverviewFragment
 import android.content.Intent
-import android.os.IBinder
-import com.example.healthymind.util.UserPreferences
-import com.example.healthymind.App
-import android.widget.Toast
-import com.example.healthymind.R
-import com.example.healthymind.entity.Recording
-import com.example.healthymind.util.MySharedPreferences
-import com.example.healthymind.service.RecordService
 import android.media.AudioManager
+import android.media.MediaRecorder
+import android.os.Build
 import android.os.Environment
-import com.example.healthymind.helper.FileHelper
-import android.os.ParcelFileDescriptor
+import android.os.IBinder
 import android.text.format.DateFormat
 import android.util.Log
+import android.widget.Toast
+import androidx.annotation.RequiresApi
+import androidx.documentfile.provider.DocumentFile
+import com.example.healthymind.App
+import com.example.healthymind.R
 import com.example.healthymind.analysis.Recognition
 import com.example.healthymind.audio.MFCC
 import com.example.healthymind.audio.WavFile
 import com.example.healthymind.auth.SessionManager
+import com.example.healthymind.entity.Recording
+import com.example.healthymind.helper.FileHelper
 import com.example.healthymind.util.Constants
+import com.example.healthymind.util.MySharedPreferences
+import com.example.healthymind.util.UserPreferences
 import com.google.firebase.database.FirebaseDatabase
 import com.jlibrosa.audio.wavFile.WavFileException
 import org.tensorflow.lite.DataType
 import org.tensorflow.lite.Interpreter
+import org.tensorflow.lite.gpu.CompatibilityList
+import org.tensorflow.lite.gpu.GpuDelegate
 import org.tensorflow.lite.support.common.FileUtil
 import org.tensorflow.lite.support.common.TensorProcessor
 import org.tensorflow.lite.support.common.ops.NormalizeOp
@@ -39,9 +37,6 @@ import org.tensorflow.lite.support.label.TensorLabel
 import org.tensorflow.lite.support.tensorbuffer.TensorBuffer
 import java.io.File
 import java.io.IOException
-import java.lang.Exception
-import java.lang.IllegalStateException
-import java.lang.RuntimeException
 import java.math.RoundingMode
 import java.nio.ByteBuffer
 import java.nio.MappedByteBuffer
@@ -49,7 +44,7 @@ import java.text.DecimalFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
-@RequiresApi(api = Build.VERSION_CODES.O)
+//@RequiresApi(api = Build.VERSION_CODES.O)
 class RecordService : Service() {
     private val formatter = SimpleDateFormat("yyyyMMddHHmmss", Locale.US)
     private var recorder: MediaRecorder? = null
@@ -59,7 +54,8 @@ class RecordService : Service() {
     private var recording = false
     private val onForeground = false
     private var idCall: String? = null
-//    var path = Environment.getExternalStorageDirectory().toString() + "/audioData/" + System.currentTimeMillis() + ".wav"
+
+    //    var path = Environment.getExternalStorageDirectory().toString() + "/audioData/" + System.currentTimeMillis() + ".wav"
     var path = Environment.getExternalStorageDirectory().toString() + "/audioData/" + "recording.wav"
     var wavRecorder = WavRecorder(path)
 
@@ -88,8 +84,7 @@ class RecordService : Service() {
             mNumFrames = wavFile.numFrames.toInt()
             mSampleRate = wavFile.sampleRate.toInt()
             mChannels = wavFile.numChannels
-            val buffer =
-                    Array(mChannels) { DoubleArray(mNumFrames) }
+            val buffer = Array(mChannels) { DoubleArray(mNumFrames) }
 
             var frameOffset = 0
             val loopCounter: Int = mNumFrames * mChannels / 4096 + 1
@@ -133,6 +128,7 @@ class RecordService : Service() {
             //code to take the mean of mfcc values across the rows such that
             //[nMFCC x nFFT] matrix would be converted into
             //[nMFCC x 1] dimension - which would act as an input to tflite model
+
             meanMFCCValues = FloatArray(nMFCC)
             for (p in 0 until nMFCC) {
                 var fftValAcrossRow = 0.0
@@ -166,29 +162,37 @@ class RecordService : Service() {
         val tflite: Interpreter
 
         /** Options for configuring the Interpreter.  */
+
+        val compatList = CompatibilityList()
+
         val tfliteOptions =
-                Interpreter.Options()
-        tfliteOptions.setNumThreads(2)
+                Interpreter.Options().apply {
+                    if (compatList.isDelegateSupportedOnThisDevice) {
+                        // if the device has a supported GPU, add the GPU delegate
+                        val delegateOptions = compatList.bestOptionsForThisDevice
+                        this.addDelegate(GpuDelegate(delegateOptions))
+                    } else {
+                        // if the GPU is not supported, run on 4 threads
+                        this.setNumThreads(4)
+                    }
+                }
+//        tfliteOptions.setNumThreads(4)
         tflite = Interpreter(tfliteModel, tfliteOptions)
 
         //obtain the input and output tensor size required by the model
-        //for urban sound classification, input tensor should be of 1x40x1x1 shape
+        //convert input shape to 4D as expected by model
         val imageTensorIndex = 0
-        val imageShape =
-                tflite.getInputTensor(imageTensorIndex).shape()
+        val imageShape = tflite.getInputTensor(imageTensorIndex).shape()
         val imageDataType: DataType = tflite.getInputTensor(imageTensorIndex).dataType()
         val probabilityTensorIndex = 0
-        val probabilityShape =
-                tflite.getOutputTensor(probabilityTensorIndex).shape()
-        val probabilityDataType: DataType =
-                tflite.getOutputTensor(probabilityTensorIndex).dataType()
+        val probabilityShape = tflite.getOutputTensor(probabilityTensorIndex).shape()
+        val probabilityDataType: DataType = tflite.getOutputTensor(probabilityTensorIndex).dataType()
 
         //need to transform the MFCC 1d float buffer into 1x40x1x1 dimension tensor using TensorBuffer
         val inBuffer: TensorBuffer = TensorBuffer.createDynamic(imageDataType)
         inBuffer.loadArray(meanMFCCValues, imageShape)
         val inpBuffer: ByteBuffer = inBuffer.getBuffer()
-        val outputTensorBuffer: TensorBuffer =
-                TensorBuffer.createFixedSize(probabilityShape, probabilityDataType)
+        val outputTensorBuffer: TensorBuffer = TensorBuffer.createFixedSize(probabilityShape, probabilityDataType)
         //run the predictions with input and output buffer tensors to get probability values across the labels
         tflite.run(inpBuffer, outputTensorBuffer.getBuffer())
 
@@ -202,7 +206,8 @@ class RecordService : Service() {
             Log.e("tfliteSupport", "Error reading label file", e)
         }
 
-        //Tensor processor for processing the probability values and to sort them based on the descending order of probabilities
+        //Tensor processor for processing the probability values and to sort them
+        // based on the descending order of probabilities
         val probabilityProcessor: TensorProcessor = TensorProcessor.Builder()
                 .add(NormalizeOp(0.0f, 255.0f)).build()
         if (null != associatedAxisLabels) {
@@ -213,11 +218,10 @@ class RecordService : Service() {
             )
 
             // Create a map to access the result based on label
-            val floatMap: Map<String, Float> =
-                    labels.getMapWithFloatValue()
+            val floatMap: Map<String, Float> = labels.getMapWithFloatValue()
 
             //function to retrieve the top K probability values, in this case 'k' value is 1.
-            //retrieved values are storied in 'Recognition' object with label details.
+            //retrieved values are stored in 'Recognition' object with label details.
             val resultPrediction: List<Recognition>? = getTopKProbability(floatMap);
 
             //get the top 1 prediction from the retrieved list of top predictions
@@ -259,30 +263,30 @@ class RecordService : Service() {
 
     fun analyzePredictions() {
         val externalStorage: File = Environment.getExternalStorageDirectory()
-        val audioDirPath = externalStorage.absolutePath + "/audioData";
-        val fileNames: MutableList<String> = ArrayList()
+        val audioDirPath = externalStorage.absolutePath + "/audioData"
+//        val fileNames: MutableList<String> = ArrayList()
 
-        File(audioDirPath).walk().forEach {
-
-            if (it.absolutePath.endsWith(".wav")) {
-                fileNames.add(it.name)
-            }
-        }
+//        File(audioDirPath).walk().forEach {
+//
+//            if (it.absolutePath.endsWith(".wav")) {
+//                fileNames.add(it.name)
+//            }
+//        }
 
         // Loop over all the recordings in the audioDir path &
         // display the depression results
 
-        var i = 0
-        var x = 0
+//        var i = 0
+//        var x = 0
 
-        val file_array = arrayOf(fileNames)
+//        val file_array = arrayOf(fileNames)
 
-        for (file in file_array) {
-            val file_size = file.size
-            while (i < file_size) {
-                val audio_files = file_array[0][i]
+//        for (file in file_array) {
+//            val file_size = file.size
+//            while (i < file_size) {
+//                val audio_files = file_array[0][i]
 
-                val full_audioPath = audioDirPath + "/" + audio_files
+                val full_audioPath = audioDirPath + "/" + "recording.wav"
                 val predicted_result = predictDepression(full_audioPath)
 //                println("Depression result is: " + predicted_result)
 
@@ -301,13 +305,12 @@ class RecordService : Service() {
 //                        val pushRef = patientRef.child("prediction_" + i)
                     patientRef.push().setValue(predicted_result)
                 }
-                i++
+//                i++
 
             }
-        }
+//        }
 
-    }
-
+//    }
 
 
     override fun onStartCommand(intent: Intent, flags: Int, startId: Int): Int {
@@ -411,7 +414,6 @@ class RecordService : Service() {
             Toast.makeText(this, this.getString(R.string.receiver_end_call),
                     Toast.LENGTH_SHORT)
                     .show()
-
 
 //            wavRecorder.stopRecording();
             val recording = Recording()

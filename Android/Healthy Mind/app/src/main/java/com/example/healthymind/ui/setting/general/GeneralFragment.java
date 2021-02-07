@@ -11,8 +11,6 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import androidx.fragment.app.Fragment;
-import androidx.core.app.NotificationCompat;
 import android.text.InputType;
 import android.text.TextUtils;
 import android.view.View;
@@ -23,12 +21,16 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import butterknife.BindView;
+import androidx.core.app.NotificationCompat;
+import androidx.fragment.app.Fragment;
+
 import com.example.healthymind.R;
 import com.example.healthymind.ui.BaseFragment;
 import com.example.healthymind.ui.MainActivity;
 import com.example.healthymind.util.MySharedPreferences;
 import com.example.healthymind.util.UserPreferences;
+
+import butterknife.BindView;
 
 import static android.content.Context.NOTIFICATION_SERVICE;
 

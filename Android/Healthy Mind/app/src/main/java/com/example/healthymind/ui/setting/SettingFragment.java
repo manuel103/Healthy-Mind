@@ -10,22 +10,20 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import butterknife.BindView;
 import com.example.healthymind.R;
 import com.example.healthymind.entity.DrawerBean;
 import com.example.healthymind.listener.OnRecyclerViewItemClick;
 import com.example.healthymind.ui.BaseFragment;
 import com.example.healthymind.ui.profile.ProfileActivity;
-import com.example.healthymind.ui.setting.tcr.TCRFragment;
 import com.example.healthymind.ui.setting.general.GeneralFragment;
-import com.example.healthymind.ui.setting.language.LanguageFragment;
 import com.example.healthymind.ui.setting.recorder.RecordingFragment;
-import com.example.healthymind.ui.setting.storage.StorageFragment;
 import com.example.healthymind.util.FragmentUtil;
 import com.example.healthymind.util.ValueConstants;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import butterknife.BindView;
 
 public class SettingFragment extends BaseFragment<SettingPresenter> implements SettingMvpView, OnRecyclerViewItemClick {
     public static final String TAG = "SettingFragment";

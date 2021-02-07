@@ -1,8 +1,5 @@
 package com.example.healthymind.auth;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -11,6 +8,9 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.healthymind.R;
 import com.google.android.material.textfield.TextInputLayout;
@@ -58,8 +58,6 @@ public class SignupActivity extends AppCompatActivity {
         regBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                rootNode = FirebaseDatabase.getInstance();
-//                reference = rootNode.getReference("patients");
 
                 if (!validateName() | !validateUsername() | !validateEmail() | !validatePhone() | !validatePassword() | !validateDoctorId()) {
                     return;

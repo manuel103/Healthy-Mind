@@ -2,15 +2,16 @@ package com.example.healthymind.ui.setting.cloud;
 
 
 import android.os.Bundle;
-import androidx.fragment.app.Fragment;
-
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import butterknife.BindView;
+import androidx.fragment.app.Fragment;
+
 import com.example.healthymind.R;
 import com.example.healthymind.ui.BaseFragment;
+
+import butterknife.BindView;
 
 /**
  * A simple {@link Fragment} subclass.

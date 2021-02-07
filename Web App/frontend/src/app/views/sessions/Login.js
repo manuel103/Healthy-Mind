@@ -15,8 +15,6 @@ const useStyles = makeStyles((theme) => ({
 
 const Login = (props) => {
   const {
-    name,
-    setName,
     email,
     setEmail,
     password,

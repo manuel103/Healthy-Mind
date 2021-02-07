@@ -18,13 +18,14 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.healthymind.R;
+import com.example.healthymind.ui.BaseFragment;
+import com.example.healthymind.util.Constants;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import com.example.healthymind.R;
-import com.example.healthymind.ui.BaseFragment;
-import com.example.healthymind.util.Constants;
 
 import static android.app.Activity.RESULT_OK;
 

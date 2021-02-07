@@ -9,6 +9,13 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.example.healthymind.R;
+import com.example.healthymind.entity.Recording;
+import com.example.healthymind.helper.FileHelper;
+import com.example.healthymind.ui.all.AllCallFragment;
+import com.example.healthymind.ui.all.TextViewItem;
+import com.example.healthymind.util.DateTimeUtil;
+
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -16,12 +23,6 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import com.example.healthymind.R;
-import com.example.healthymind.entity.Recording;
-import com.example.healthymind.helper.FileHelper;
-import com.example.healthymind.ui.all.AllCallFragment;
-import com.example.healthymind.ui.all.TextViewItem;
-import com.example.healthymind.util.DateTimeUtil;
 
 public class RecycleBinFragment extends AllCallFragment {
 

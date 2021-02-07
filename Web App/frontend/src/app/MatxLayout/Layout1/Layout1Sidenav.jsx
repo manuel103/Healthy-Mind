@@ -4,7 +4,6 @@ import {
   Switch,
   Icon,
   withStyles,
-  MenuItem,
   Tooltip,
   IconButton,
   MuiThemeProvider,
@@ -17,7 +16,6 @@ import {
 } from "app/redux/actions/LayoutActions";
 import { logoutUser } from "app/redux/actions/UserActions";
 import { withRouter } from "react-router-dom";
-import { MatxMenu } from "matx";
 import Sidenav from "../SharedCompoents/Sidenav";
 import Brand from "../SharedCompoents/Brand";
 import SidenavTheme from "../MatxTheme/SidenavTheme";

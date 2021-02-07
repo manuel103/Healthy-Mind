@@ -1,16 +1,16 @@
 import React, { Component } from "react";
 import { Icon, IconButton, withStyles } from "@material-ui/core";
 
-const styles = theme => ({
+const styles = (theme) => ({
   root: {
     backgroundColor: theme.palette.primary.main,
-    color: theme.palette.primary.contrastText
-  }
+    color: theme.palette.primary.contrastText,
+  },
 });
 
 class MatxSearchBox extends Component {
   state = {
-    open: false
+    open: false,
   };
 
   toggle = () => {
@@ -23,7 +23,7 @@ class MatxSearchBox extends Component {
       <React.Fragment>
         {!this.state.open && (
           <IconButton onClick={this.toggle}>
-            <Icon>search</Icon>
+            <Icon style={{ color: "#fff !important;" }}>search</Icon>
           </IconButton>
         )}
 

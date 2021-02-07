@@ -5,10 +5,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-import butterknife.BindView;
 import com.example.healthymind.R;
 import com.example.healthymind.ui.setting.SettingFragment;
 import com.example.healthymind.util.StringUtils;
+
+import butterknife.BindView;
 
 public class AboutFragment extends SettingFragment {
 

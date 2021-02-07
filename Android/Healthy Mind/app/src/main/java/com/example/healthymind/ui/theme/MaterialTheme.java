@@ -4,11 +4,11 @@ package com.example.healthymind.ui.theme;
 import androidx.annotation.StringRes;
 import androidx.annotation.StyleRes;
 
+import com.example.healthymind.R;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
-import com.example.healthymind.R;
 
 public class MaterialTheme implements Serializable {
     // App themes

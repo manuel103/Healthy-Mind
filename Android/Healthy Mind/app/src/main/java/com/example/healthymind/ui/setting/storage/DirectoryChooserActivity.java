@@ -19,6 +19,10 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.healthymind.R;
+import com.example.healthymind.util.Constants;
+import com.example.healthymind.util.UserPreferences;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -27,9 +31,6 @@ import java.util.Collections;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import com.example.healthymind.R;
-import com.example.healthymind.util.Constants;
-import com.example.healthymind.util.UserPreferences;
 
 public class DirectoryChooserActivity extends Activity {
 

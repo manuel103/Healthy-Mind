@@ -65,13 +65,13 @@ const DoughnutChart = ({ height, color = [], theme }) => {
       Object.keys(item.depression_levels).forEach(function (key) {
         const depression_levels = item.depression_levels[key];
 
-        if (depression_levels == "none") {
+        if (depression_levels === "none") {
           none_count += 1;
-        } else if (depression_levels == "mild") {
+        } else if (depression_levels === "mild") {
           mild_count += 1;
-        } else if (depression_levels == "severe") {
+        } else if (depression_levels === "severe") {
           severe_count += 1;
-        } else if (depression_levels == "moderately severe") {
+        } else if (depression_levels === "moderately severe") {
           moderatelySevere_count += 1;
         } else {
           moderate_count += 1;

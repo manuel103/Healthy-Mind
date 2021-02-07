@@ -10,12 +10,12 @@ import android.view.ViewGroup;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.healthymind.R;
+import com.example.healthymind.recycle.viewholder.SimpleViewHolder;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
-import com.example.healthymind.R;
-import com.example.healthymind.recycle.viewholder.SimpleViewHolder;
 
 public abstract class NormalAdapter<D> extends LoadMoreAdapterWithObject<D> {
 

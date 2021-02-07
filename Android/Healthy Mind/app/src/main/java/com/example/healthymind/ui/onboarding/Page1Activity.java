@@ -1,10 +1,5 @@
 package com.example.healthymind.ui.onboarding;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.viewpager.widget.ViewPager;
-
 import android.Manifest;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -18,10 +13,13 @@ import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager.widget.ViewPager;
+
 import com.example.healthymind.R;
-import com.example.healthymind.auth.LoginActivity;
 import com.example.healthymind.auth.SessionManager;
-import com.example.healthymind.auth.UserHelper;
 import com.example.healthymind.ui.MainActivity;
 import com.example.healthymind.util.Constants;
 import com.google.android.material.textfield.TextInputLayout;

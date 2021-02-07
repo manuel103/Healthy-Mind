@@ -4,12 +4,13 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import butterknife.BindView;
 import com.example.healthymind.R;
 import com.example.healthymind.entity.DrawerBean;
 import com.example.healthymind.recycle.viewholder.BaseViewHolder;
 import com.example.healthymind.util.ImageUtil;
 import com.example.healthymind.util.StringUtils;
+
+import butterknife.BindView;
 
 
 public class SettingItemViewHolder extends BaseViewHolder<DrawerBean> {

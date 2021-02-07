@@ -2,6 +2,9 @@ package com.example.healthymind.util;
 
 import android.os.Build;
 import android.os.Bundle;
+import android.transition.TransitionInflater;
+import android.util.Log;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -9,10 +12,6 @@ import androidx.core.view.ViewCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentTransaction;
-
-import android.transition.TransitionInflater;
-import android.util.Log;
-import android.view.View;
 
 import com.example.healthymind.R;
 

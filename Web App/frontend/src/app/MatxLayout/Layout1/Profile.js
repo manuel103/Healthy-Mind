@@ -7,7 +7,6 @@ import FetchDoctor from './FetchDoctor'
 const Profile = () => {
   const [user, setUser] = useState("");
   const [doctor, setDoctor] = useState(0);
-  var [currentId, setCurrentId] = useState("");
 
   const authListener = () => {
     fireDb.auth().onAuthStateChanged((user) => {
@@ -50,10 +49,6 @@ const Profile = () => {
           console.log(err);
         }
       });
-  };
-
-  const onDelete = (id) => {
-    // record with given id is to be deleted.
   };
 
   return (

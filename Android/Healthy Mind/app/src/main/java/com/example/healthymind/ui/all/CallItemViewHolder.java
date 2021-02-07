@@ -7,18 +7,19 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.io.File;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Locale;
-
-import butterknife.BindView;
 import com.example.healthymind.R;
 import com.example.healthymind.entity.Recording;
 import com.example.healthymind.recycle.viewholder.BaseViewHolder;
 import com.example.healthymind.util.ImageUtil;
 import com.example.healthymind.util.MySharedPreferences;
 import com.example.healthymind.util.StringUtils;
+
+import java.io.File;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
+
+import butterknife.BindView;
 
 
 public class CallItemViewHolder extends BaseViewHolder<Recording> {

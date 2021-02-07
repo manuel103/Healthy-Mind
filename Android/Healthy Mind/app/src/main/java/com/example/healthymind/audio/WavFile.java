@@ -2,13 +2,10 @@ package com.example.healthymind.audio;
 
 import com.jlibrosa.audio.wavFile.WavFileException;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.math.RoundingMode;
-import java.text.DecimalFormat;
 
 /*
 Source based on https://github.com/Semantive/waveform-android/blob/master/library/src/main/java/com/semantive/waveformandroid/waveform/soundfile/WavFile.java

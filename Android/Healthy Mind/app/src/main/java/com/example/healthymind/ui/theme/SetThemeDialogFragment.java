@@ -12,12 +12,12 @@ import android.view.ViewGroup;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.example.healthymind.R;
 import com.example.healthymind.ui.MainActivity;
 import com.example.healthymind.util.MySharedPreferences;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class SetThemeDialogFragment extends DialogFragment implements DialogInterface.OnClickListener {
     private static final String KEY_ARG_CURRENT_THEME = "KEY_ARG_CURRENT_THEME";

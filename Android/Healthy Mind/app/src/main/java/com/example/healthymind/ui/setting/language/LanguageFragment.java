@@ -6,19 +6,21 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import androidx.fragment.app.Fragment;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import java.util.Locale;
+import androidx.fragment.app.Fragment;
 
-import butterknife.BindView;
 import com.example.healthymind.R;
 import com.example.healthymind.ui.BaseFragment;
 import com.example.healthymind.util.MySharedPreferences;
+
+import java.util.Locale;
+
+import butterknife.BindView;
 
 /**
  * A simple {@link Fragment} subclass.

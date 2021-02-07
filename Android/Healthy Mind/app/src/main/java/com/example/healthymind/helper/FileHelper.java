@@ -7,29 +7,24 @@ import android.database.Cursor;
 import android.media.MediaMetadataRetriever;
 import android.net.Uri;
 import android.os.Build;
-import android.os.Environment;
 import android.os.StatFs;
 import android.provider.ContactsContract;
+import android.telephony.PhoneNumberUtils;
+import android.text.format.DateFormat;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.FileProvider;
 import androidx.documentfile.provider.DocumentFile;
 
-import android.telephony.PhoneNumberUtils;
-import android.text.format.DateFormat;
-import android.text.format.Time;
-import android.util.Log;
+import com.example.healthymind.entity.Recording;
+import com.example.healthymind.util.Constants;
+import com.example.healthymind.util.UserPreferences;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
-import com.example.healthymind.entity.Recording;
-import com.example.healthymind.service.ConvertToWav;
-import com.example.healthymind.util.Constants;
-import com.example.healthymind.util.UserPreferences;
 
 public class FileHelper {
     /**

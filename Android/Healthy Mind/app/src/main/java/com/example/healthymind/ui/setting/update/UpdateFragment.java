@@ -3,18 +3,19 @@ package com.example.healthymind.ui.setting.update;
 
 import android.app.Activity;
 import android.os.Bundle;
-import androidx.fragment.app.Fragment;
-
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
 
-import butterknife.BindView;
+import androidx.fragment.app.Fragment;
+
 import com.example.healthymind.R;
 import com.example.healthymind.ui.BaseFragment;
 import com.example.healthymind.util.MySharedPreferences;
+
+import butterknife.BindView;
 
 /**
  * A simple {@link Fragment} subclass.

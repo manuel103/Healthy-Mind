@@ -56,7 +56,7 @@ const defaultOption = {
     max: 100,
     axisLabel: {
       color: "#ccc",
-      margin: 20,
+      margin: 10,
       fontSize: 13,
       fontFamily: "roboto",
     },

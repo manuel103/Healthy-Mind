@@ -11,9 +11,10 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import butterknife.ButterKnife;
 import com.example.healthymind.R;
 import com.example.healthymind.util.MySharedPreferences;
+
+import butterknife.ButterKnife;
 
 public abstract class BaseActivity extends AppCompatActivity {
     protected int theme;

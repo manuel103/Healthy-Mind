@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import BootstrapTable from "react-bootstrap-table-next";
 import { fireDb } from "../../services/firebase/firebaseConfig";
 
 export let docName = '';

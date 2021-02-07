@@ -7,14 +7,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import androidx.core.app.NotificationCompat;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import butterknife.BindView;
+import androidx.core.app.NotificationCompat;
+
 import com.example.healthymind.R;
 import com.example.healthymind.entity.DrawerBean;
 import com.example.healthymind.recycle.viewholder.BaseViewHolder;
@@ -23,6 +23,8 @@ import com.example.healthymind.util.ImageUtil;
 import com.example.healthymind.util.MySharedPreferences;
 import com.example.healthymind.util.StringUtils;
 import com.example.healthymind.util.UserPreferences;
+
+import butterknife.BindView;
 
 import static android.content.Context.NOTIFICATION_SERVICE;
 

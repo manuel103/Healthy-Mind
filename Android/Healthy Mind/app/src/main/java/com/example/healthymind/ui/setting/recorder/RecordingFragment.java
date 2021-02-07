@@ -16,11 +16,12 @@ import android.widget.RelativeLayout;
 import android.widget.Switch;
 import android.widget.TextView;
 
-import butterknife.BindView;
 import com.example.healthymind.R;
 import com.example.healthymind.ui.BaseFragment;
 import com.example.healthymind.util.MySharedPreferences;
 import com.example.healthymind.util.UserPreferences;
+
+import butterknife.BindView;
 
 public class RecordingFragment extends BaseFragment {
 

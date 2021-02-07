@@ -10,6 +10,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.healthymind.R;
+import com.example.healthymind.entity.PayPalEntity;
+import com.example.healthymind.ui.BaseFragment;
 import com.paypal.android.sdk.payments.PayPalConfiguration;
 import com.paypal.android.sdk.payments.PayPalPayment;
 import com.paypal.android.sdk.payments.PayPalService;
@@ -21,9 +24,6 @@ import org.json.JSONException;
 import java.math.BigDecimal;
 
 import butterknife.BindView;
-import com.example.healthymind.R;
-import com.example.healthymind.entity.PayPalEntity;
-import com.example.healthymind.ui.BaseFragment;
 
 
 public class DonateOptionFragment extends BaseFragment<DonateOptionPresenter> implements DonateOptionMvp {

@@ -18,11 +18,12 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 import com.example.healthymind.R;
 import com.example.healthymind.mvp.BasePresenter;
 import com.example.healthymind.util.StringUtils;
+
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 public abstract class BaseFragment<T extends BasePresenter> extends Fragment {
 

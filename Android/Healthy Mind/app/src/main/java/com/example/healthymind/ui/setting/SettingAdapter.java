@@ -1,11 +1,11 @@
 package com.example.healthymind.ui.setting;
 
-import androidx.fragment.app.FragmentActivity;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.fragment.app.FragmentActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.healthymind.entity.DrawerBean;
 import com.example.healthymind.recycle.adapter.BaseAdapter;

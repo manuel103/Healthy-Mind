@@ -7,14 +7,12 @@ import android.os.PersistableBundle;
 import androidx.annotation.Nullable;
 
 import com.daimajia.androidanimations.library.Techniques;
-import com.example.healthymind.auth.LoginActivity;
-import com.viksaa.sssplash.lib.activity.AwesomeSplash;
-import com.viksaa.sssplash.lib.model.ConfigSplash;
-
 import com.example.healthymind.R;
-import com.example.healthymind.ui.MainActivity;
+import com.example.healthymind.auth.LoginActivity;
 import com.example.healthymind.util.Constants;
 import com.example.healthymind.util.MySharedPreferences;
+import com.viksaa.sssplash.lib.activity.AwesomeSplash;
+import com.viksaa.sssplash.lib.model.ConfigSplash;
 
 
 

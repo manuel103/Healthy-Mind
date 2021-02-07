@@ -1,18 +1,10 @@
 package com.example.healthymind.ui.profile;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.documentfile.provider.DocumentFile;
-
 import android.content.ContentResolver;
 import android.content.Context;
-import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.os.Environment;
 import android.provider.ContactsContract;
-import android.text.format.DateFormat;
-import android.text.format.Time;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,14 +19,12 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.activeandroid.util.Log;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.healthymind.R;
 import com.example.healthymind.auth.SessionManager;
-import com.example.healthymind.helper.FileHelper;
-import com.example.healthymind.service.ConvertToWav;
-import com.example.healthymind.ui.MainActivity;
 import com.example.healthymind.ui.all.OverviewFragment;
-import com.example.healthymind.ui.onboarding.Page2Activity;
 import com.example.healthymind.ui.onboarding.ProfileConstructor;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.database.DataSnapshot;
@@ -43,10 +33,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.io.File;
-import java.io.IOException;
+import java.security.MessageDigest;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -257,7 +245,7 @@ public class ProfileActivity extends AppCompatActivity implements AdapterView.On
                     update_phone_number.getEditText().setText(phone_number);
                     // update_contacts.getEditText().setText(trusted_contacts);
                     update_email.getEditText().setText(email);
-                    update_password.getEditText().setText(password);
+//                    update_password.getEditText().setText(password);
                     occupation.setText(occupation_details);
                 }
             }
@@ -359,8 +347,10 @@ public class ProfileActivity extends AppCompatActivity implements AdapterView.On
                 if (dataSnapshot.exists()) {
                     String password = dataSnapshot.child("password").getValue(String.class);
 
+                    String newPass = sha256(update_password.getEditText().getText().toString());
+
                     if (password != update_phone_number.getEditText().getText().toString()) {
-                        reference.child("password").setValue(update_password.getEditText().getText().toString());
+                        reference.child("password").setValue(newPass);
                         Toast.makeText(ProfileActivity.this, "Details Updated", Toast.LENGTH_LONG).show();
 
                     }
@@ -378,8 +368,6 @@ public class ProfileActivity extends AppCompatActivity implements AdapterView.On
     public void goBack(View view) {
         finish();
     }
-
-
 
     class MyAdapter extends BaseAdapter implements CompoundButton.OnCheckedChangeListener {
         private SparseBooleanArray mCheckStates;
@@ -449,5 +437,21 @@ public class ProfileActivity extends AppCompatActivity implements AdapterView.On
             mCheckStates.put((Integer) buttonView.getTag(), isChecked);
         }
     }
+    public static String sha256(String base) {
+        try {
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            byte[] hash = digest.digest(base.getBytes("UTF-8"));
+            StringBuffer hexString = new StringBuffer();
 
+            for (int i = 0; i < hash.length; i++) {
+                String hex = Integer.toHexString(0xff & hash[i]);
+                if (hex.length() == 1) hexString.append('0');
+                hexString.append(hex);
+            }
+
+            return hexString.toString();
+        } catch (Exception ex) {
+            throw new RuntimeException(ex);
+        }
+    }
 }

@@ -1,12 +1,11 @@
-import React, { Component, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Grid, Card, Icon, Fab } from "@material-ui/core";
 import { fireDb } from "../../../services/firebase/firebaseConfig";
 
 const StatCards2 = () => {
   const [patients, setPatients] = useState([]);
   const [user, setUser] = useState("");
-  let docPatients = []
-
+  let docPatients = [];
 
   useEffect(() => {
     async function loadPatients() {
@@ -28,7 +27,7 @@ const StatCards2 = () => {
     loadPatients();
   }, []);
 
-    const authListener = () => {
+  const authListener = () => {
     fireDb.auth().onAuthStateChanged((user) => {
       // clearInputs();
       if (user) {
@@ -43,20 +42,21 @@ const StatCards2 = () => {
     authListener();
   }, []);
 
-    patients &&
+  patients &&
     Object.keys(patients).forEach(function (key) {
       const data = patients[key];
-      if (data.docId == user.email) {
+      if (data.docId === user.email) {
         // console.log(data);
-        docPatients.push(data)
+        docPatients.push(data);
       }
     });
 
   let total_patients = docPatients.length;
-  let perc_increase = (((total_patients-(total_patients-1)) / (total_patients-1)) * 100).toFixed(
-    2
-  );
-  
+  let perc_increase = (
+    ((total_patients - (total_patients - 1)) / (total_patients - 1)) *
+    100
+  ).toFixed(2);
+
   return (
     <Grid container spacing={3} className="mb-24">
       <Grid item xs={12} md={6}>
@@ -66,7 +66,12 @@ const StatCards2 = () => {
               size="medium"
               className="bg-light-green circle-44 box-shadow-none"
             >
-              <Icon className="text-green">trending_up</Icon>
+              <Icon
+                className="IconTrending"
+                style={{ color: "#fff !important;" }}
+              >
+                trending_up
+              </Icon>
             </Fab>
             <h5 className="font-weight-500 text-green m-0 ml-12">
               Active Patients
@@ -74,7 +79,11 @@ const StatCards2 = () => {
           </div>
           <div className="pt-16 flex flex-middle">
             <h2 className="m-0 text-muted flex-grow-1">
-              {total_patients === 0 ? <h6>No patients available</h6> : total_patients}
+              {total_patients === 0 ? (
+                <h6>No patients available</h6>
+              ) : (
+                total_patients
+              )}
             </h2>
             <div className="ml-12 small-circle bg-green text-white">
               <Icon className="small-icon">expand_less</Icon>

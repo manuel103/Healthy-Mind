@@ -5,8 +5,9 @@ import android.view.View;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import butterknife.ButterKnife;
 import com.example.healthymind.listener.OnRecyclerViewItemClick;
+
+import butterknife.ButterKnife;
 
 public class BaseViewHolder<T> extends RecyclerView.ViewHolder implements View.OnClickListener {
 

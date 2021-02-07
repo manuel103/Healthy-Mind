@@ -32,7 +32,7 @@ const Footer = ({ theme, settings }) => {
           </a> */}
           <span className="m-auto"></span>
           {/* <p className="m-0">
-            Design and Developed by <a href="http://ui-lib.com">UI Lib</a>
+            Design and Developed by <a href="#"></a>
           </p> */}
         </div>
       </div>

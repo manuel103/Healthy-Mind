@@ -2,17 +2,14 @@ package com.example.healthymind.ui.all
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ListView
-import androidx.annotation.NonNull
 import androidx.fragment.app.Fragment
 import com.example.healthymind.R
 import com.example.healthymind.auth.SessionManager
-import com.example.healthymind.ui.about.AboutFragment.TAG
 import com.example.healthymind.ui.onboarding.ContactModel
 import com.example.healthymind.ui.onboarding.Model
 import com.example.healthymind.ui.onboarding.MyContactListAdapter

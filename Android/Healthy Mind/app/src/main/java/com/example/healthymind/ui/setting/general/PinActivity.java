@@ -6,10 +6,11 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import butterknife.BindView;
 import com.example.healthymind.R;
 import com.example.healthymind.ui.BaseActivity;
 import com.example.healthymind.util.MySharedPreferences;
+
+import butterknife.BindView;
 
 public class PinActivity extends BaseActivity {
     @BindView(R.id.num0)

@@ -5,3 +5,20 @@
 .sideIcon {
     margin-right: 10px;
 }
+
+.ModalTitle{
+    color: #020000 !important;
+}
+
+.TableData{
+    color: #020000;
+    font-weight: 10px;
+}
+
+.DepressionScore{
+    color: green;
+}
+
+.IconTrending{
+    color: red !important;
+}

@@ -6,10 +6,9 @@ import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
 import com.activeandroid.query.Select;
+import com.example.healthymind.entity.Recording;
 
 import java.util.List;
-
-import com.example.healthymind.entity.Recording;
 
 
 @Table(name = "NumberPhone")

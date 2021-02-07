@@ -7,7 +7,6 @@ import { Link } from "react-router-dom";
 import StorageIcon from "@material-ui/icons/Storage";
 import NotInterestedIcon from "@material-ui/icons/NotInterested";
 import RadioButtonCheckedIcon from "@material-ui/icons/RadioButtonChecked";
-import OfflineBoltIcon from "@material-ui/icons/OfflineBolt";
 import ErrorIcon from "@material-ui/icons/Error";
 import ErrorOutlineIcon from "@material-ui/icons/ErrorOutline";
 import PanoramaFishEyeIcon from "@material-ui/icons/PanoramaFishEye";
@@ -48,16 +47,11 @@ const TableCard = () => {
   let empty_result = "";
 
   // Prediction score variables
-  let normal_score = "";
   let none_score = "";
   let mild_score = "";
   let severe_score = "";
   let moderately_severe_score = "";
   let moderate_score = "";
-  let extreme_score = "";
-  let empty_result_score = "";
-  let no_score = "";
-  let no_prediction = "";
 
   const authListener = () => {
     fireDb.auth().onAuthStateChanged((user) => {
@@ -118,7 +112,7 @@ const TableCard = () => {
   const rowEvents = {
     onClick: (e, row) => {
       console.log(
-        row.depression_levels == undefined ? "No data" : row.depression_levels
+        row.depression_levels === undefined ? "No data" : row.depression_levels
       );
       setModalInfo(row);
       setdepressionLevels(row.depression_levels);
@@ -167,14 +161,12 @@ const TableCard = () => {
 
   // convert scores to percentage
   const none_count_P = Math.round((none_count / total_scores) * 100);
-  const normal_count_P = Math.round((normal_count / total_scores) * 100);
   const mild_count_P = Math.round((mild_count / total_scores) * 100);
   const severe_count_P = Math.round((severe_count / total_scores) * 100);
   const moderatelySevere_count_P = Math.round(
     (moderatelySevere_count / total_scores) * 100
   );
   const moderate_count_P = Math.round((moderate_count / total_scores) * 100);
-  const extreme_count_P = Math.round((extreme_count / total_scores) * 100);
 
   const percentage_scores = [
     none_count_P,
@@ -187,19 +179,19 @@ const TableCard = () => {
   // console.log("Percentages...", percentage_scores);
   // Returning the mod value for rendering & assign scores to the depression level
   const mod = Math.max(...all_scores);
-  if (none_count == mod) {
+  if (none_count === mod) {
     none = "none";
     none_score = 0;
-  } else if (mild_count == mod) {
+  } else if (mild_count === mod) {
     mild = "mild";
     mild_score = Math.floor(Math.random() * (5 - 0 + 1) + 0);
-  } else if (severe_count == mod) {
+  } else if (severe_count === mod) {
     severe = "severe";
     severe_score = Math.floor(Math.random() * (25 - 15 + 1) + 15);
-  } else if (moderatelySevere_count == mod) {
+  } else if (moderatelySevere_count === mod) {
     moderately_severe = "moderately severe";
     moderately_severe_score = Math.floor(Math.random() * (15 - 10 + 1) + 10);
-  } else if (moderate_count == mod) {
+  } else if (moderate_count === mod) {
     moderate = "moderate";
     moderate_score = Math.floor(Math.random() * (10 - 5 + 1) + 5);
   } else {
@@ -208,13 +200,13 @@ const TableCard = () => {
 
   // Check if the prediction array is empty
   if (
-    none == "" &&
-    normal == "" &&
-    mild == "" &&
-    severe == "" &&
-    moderately_severe == "" &&
-    moderate == "" &&
-    extreme == ""
+    none === "" &&
+    normal === "" &&
+    mild === "" &&
+    severe === "" &&
+    moderately_severe === "" &&
+    moderate === "" &&
+    extreme === ""
   ) {
     empty_result = "No predictions made";
   }
@@ -277,13 +269,13 @@ const TableCard = () => {
                     <div className="card-body">
                       <div className="d-flex flex-column align-items-center text-center">
                         <img
-                          src="https://bootdey.com/img/Content/avatar/avatar7.png"
+                          src="/assets/images/avatar.png"
                           alt="Admin"
                           className="rounded-circle"
                           width={150}
                         />
                         <div className="mt-3">
-                          <h4>
+                          <h4 className="ModalTitle">
                             {/* {Object.keys(depressionLevels).map((key, i) => (
                               <p key={i}>
                                 <span>Key Name: {key}</span>
@@ -293,10 +285,10 @@ const TableCard = () => {
                             {modalInfo.username},{" "}
                             {modalInfo.profile?.general?.age}
                           </h4>
-                          <p className="text-secondary mb-1">
+                          <p className="TableData mb-1">
                             {modalInfo.profile?.general?.education}
                           </p>
-                          <p className="text-muted font-size-sm">
+                          <p className="text-muted font-size-sm TableData">
                             {modalInfo.profile?.general?.employment}
                           </p>
                         </div>
@@ -306,59 +298,61 @@ const TableCard = () => {
                   <div className="card mt-3">
                     <ul className="list-group list-group-flush">
                       <li className="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                        <h6 className="mb-0">
+                        <h6 className="mb-0 ModalTitle">
                           <StorageIcon className="sideIcon" />
                           Number of Samples Analyzed
                         </h6>
-                        <span className="text-secondary">{total_scores}</span>
+                        <span className="DepressionScore">{total_scores}</span>
                       </li>
                       <li className="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                        <h6 className="mb-0">
+                        <h6 className="mb-0 ModalTitle">
                           <NotInterestedIcon className="sideIcon" />
                           Total None Predictions
                         </h6>
-                        <span className="text-secondary">{none_count}</span>
+                        <span className="DepressionScore">{none_count}</span>
                       </li>
 
                       <li className="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                        <h6 className="mb-0">
+                        <h6 className="mb-0 ModalTitle">
                           <PanoramaFishEyeIcon className="sideIcon" />
                           Total Mild Predictions
                         </h6>
-                        <span className="text-secondary">{mild_count}</span>
+                        <span className="DepressionScore">{mild_count}</span>
                       </li>
                       <li className="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                        <h6 className="mb-0">
+                        <h6 className="mb-0 ModalTitle">
                           <RadioButtonCheckedIcon className="sideIcon" />
                           Total Moderate Predictions
                         </h6>
-                        <span className="text-secondary">{moderate_count}</span>
+                        <span className="DepressionScore">
+                          {moderate_count}
+                        </span>
                       </li>
                       <li className="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                        <h6 className="mb-0">
+                        <h6 className="mb-0 ModalTitle">
                           <ErrorOutlineIcon className="sideIcon" />
                           Total Moderately Severe Predictions
                         </h6>
-                        <span className="text-secondary">
+                        <span className="DepressionScore">
                           {moderatelySevere_count}
                         </span>
                       </li>
                       <li className="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                        <h6 className="mb-0">
+                        <h6 className="mb-0 ModalTitle">
                           <ErrorIcon className="sideIcon" />
-                          Severe Predictions
+                          Total Severe Predictions
                         </h6>
-                        <span className="text-secondary">{severe_count}</span>
+                        <span className="DepressionScore">{severe_count}</span>
                       </li>
                     </ul>
                   </div>
                   <div className="card mt-3">
                     <div className="card h-100">
                       <div className="card-body">
-                        <h6 className="d-flex align-items-center mb-3">
-                          <i className="material-icons text-info mr-2">
+                        <h6 className="d-flex align-items-center mb-3 ModalTitle">
+                          {/* <i className="material-icons text-info mr-2">
                             assignment
-                          </i>
+                          </i> */}
                           Depression Scale
                         </h6>
 
@@ -426,36 +420,36 @@ const TableCard = () => {
                     <div className="card-body">
                       <div className="row">
                         <div className="col-sm-3">
-                          <h6 className="mb-0">Full Name</h6>
+                          <h6 className="mb-0 ModalTitle">Full Name</h6>
                         </div>
-                        <div className="card-title text-muted mb-16">
+                        <div className="card-title col-sm-9 ModalTitle">
                           {modalInfo.name}
                         </div>
                       </div>
                       <hr />
                       <div className="row">
                         <div className="col-sm-3">
-                          <h6 className="mb-0">Email</h6>
+                          <h6 className="mb-0 ModalTitle">Email</h6>
                         </div>
-                        <div className="col-sm-9 text-secondary">
+                        <div className="col-sm-9 TableData">
                           {modalInfo.email}
                         </div>
                       </div>
                       <hr />
                       <div className="row">
                         <div className="col-sm-3">
-                          <h6 className="mb-0">Phone</h6>
+                          <h6 className="mb-0 ModalTitle">Phone</h6>
                         </div>
-                        <div className="col-sm-9 text-secondary">
+                        <div className="col-sm-9 TableData">
                           {modalInfo.phoneNo}
                         </div>
                       </div>
                       <hr />
                       <div className="row">
                         <div className="col-sm-3">
-                          <h6 className="mb-0">Trusted Contacts</h6>
+                          <h6 className="mb-0 ModalTitle">Trusted Contacts</h6>
                         </div>
-                        <div className="col-sm-9 text-secondary">
+                        <div className="col-sm-9 TableData">
                           {modalInfo.profile?.contacts?.contacts ? (
                             modalInfo.profile?.contacts?.contacts
                           ) : (
@@ -468,11 +462,11 @@ const TableCard = () => {
                       <hr />
                       <div className="row">
                         <div className="col-sm-3">
-                          <h6 className="mb-0">
+                          <h6 className="mb-0 ModalTitle">
                             Notify Trusted Contacts of Patient's Progress?
                           </h6>
                         </div>
-                        <div className="col-sm-9 text-secondary">
+                        <div className="col-sm-9 TableData">
                           {modalInfo.profile?.contacts?.notify ? (
                             modalInfo.profile?.contacts?.notify
                           ) : (
@@ -483,9 +477,11 @@ const TableCard = () => {
                       <hr />
                       <div className="row">
                         <div className="col-sm-3">
-                          <h6 className="mb-0">Predicted Depression Level</h6>
+                          <h6 className="mb-0 ModalTitle">
+                            Predicted Depression Level
+                          </h6>
                         </div>
-                        <div className="col-sm-9 text-secondary">
+                        <div className="col-sm-9 TableData">
                           {/* Render the mod prediction value */}
                           {none}
                           {mild}
@@ -498,10 +494,9 @@ const TableCard = () => {
                       <hr />
                       <div className="row">
                         <div className="col-sm-3">
-                          <h6 className="mb-0">Depression Score</h6>
+                          <h6 className="mb-0 ModalTitle">Depression Score</h6>
                         </div>
-
-                        <div className="col-sm-9 text-secondary">
+                        <div className="col-sm-9 TableData">
                           {none_score}
                           {mild_score}
                           {moderate_score}
@@ -511,7 +506,7 @@ const TableCard = () => {
                       </div>
                     </div>
                   </div>
-                  <h6>30 Day Timelapse Progress</h6>
+                  <h6 className="ModalTitle">Linear Trend</h6>
                   <div className="card mb-3 bg-primary">
                     <div className="card-body">
                       <ModifiedAreaChart
@@ -531,7 +526,7 @@ const TableCard = () => {
                               "Mild",
                               "Moderate",
                               "Mod. Severe",
-                              "Severe"
+                              "Severe",
                             ],
                           },
                         }}

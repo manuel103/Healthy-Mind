@@ -14,14 +14,14 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import java.util.HashMap;
-import java.util.Locale;
-import java.util.Map;
-
 import com.example.healthymind.R;
 import com.example.healthymind.ui.DetailActivity;
 import com.example.healthymind.util.Constants;
 import com.example.healthymind.util.MySharedPreferences;
+
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Map;
 
 public class LanguagesDialog extends DialogFragment {
     @Override

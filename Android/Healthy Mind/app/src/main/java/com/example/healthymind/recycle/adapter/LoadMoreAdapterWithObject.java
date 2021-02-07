@@ -8,9 +8,9 @@ import android.view.ViewGroup;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.List;
-
 import com.example.healthymind.recycle.viewholder.DefaultLoadMoreViewHolder;
+
+import java.util.List;
 
 public abstract class LoadMoreAdapterWithObject<D> extends RecyclerView.Adapter {
     private final Context context;

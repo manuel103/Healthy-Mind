@@ -1,7 +1,6 @@
 package com.example.healthymind;
 
 import android.app.Application;
-import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Build;
@@ -9,17 +8,12 @@ import android.os.StrictMode;
 import android.util.DisplayMetrics;
 
 import com.activeandroid.ActiveAndroid;
-import com.example.healthymind.auth.SessionManager;
-import com.example.healthymind.ui.MainActivity;
+import com.example.healthymind.util.MySharedPreferences;
+import com.example.healthymind.util.UserPreferences;
 import com.google.android.gms.analytics.GoogleAnalytics;
 import com.google.android.gms.analytics.Tracker;
 
 import java.util.Locale;
-
-import com.example.healthymind.util.MySharedPreferences;
-import com.example.healthymind.util.UserPreferences;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 
 public class App extends Application {

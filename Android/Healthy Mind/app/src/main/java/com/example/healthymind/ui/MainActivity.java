@@ -3,34 +3,32 @@ package com.example.healthymind.ui;
 import android.Manifest;
 import android.app.AlertDialog;
 import android.app.SearchManager;
-import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.content.res.AssetFileDescriptor;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Build;
+import android.view.Gravity;
+import android.view.Menu;
+import android.view.View;
+import android.widget.SearchView;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.core.view.MenuItemCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.DialogFragment;
 import androidx.viewpager.widget.ViewPager;
 
-import android.util.Log;
-import android.view.Gravity;
-import android.view.Menu;
-import android.view.View;
-import android.widget.SearchView;
-import android.widget.Toast;
-
-import com.example.healthymind.auth.LoginActivity;
-import com.example.healthymind.auth.SessionManager;
+import com.example.healthymind.R;
+import com.example.healthymind.entity.MessageEvent;
+import com.example.healthymind.ui.adapter.ViewPagerAdapter;
 import com.example.healthymind.ui.all.OverviewFragment;
+import com.example.healthymind.ui.navigation.NavigationDrawerFragment;
+import com.example.healthymind.ui.setting.general.PinActivity;
+import com.example.healthymind.util.Constants;
+import com.example.healthymind.util.MySharedPreferences;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdView;
 import com.google.android.material.tabs.TabLayout;
@@ -38,28 +36,10 @@ import com.google.android.material.tabs.TabLayout;
 import org.greenrobot.eventbus.EventBus;
 import org.tensorflow.lite.Interpreter;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.nio.MappedByteBuffer;
-import java.nio.channels.FileChannel;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import butterknife.BindView;
-import com.example.healthymind.R;
-import com.example.healthymind.entity.MessageEvent;
-import com.example.healthymind.ui.adapter.ViewPagerAdapter;
-import com.example.healthymind.ui.coming.InComingFragment;
-import com.example.healthymind.ui.going.OutGoingFragment;
-import com.example.healthymind.ui.important.ImportantFragment;
-import com.example.healthymind.ui.navigation.NavigationDrawerFragment;
-import com.example.healthymind.ui.setting.general.PinActivity;
-import com.example.healthymind.ui.theme.MaterialTheme;
-import com.example.healthymind.ui.theme.SetThemeDialogFragment;
-import com.example.healthymind.util.Constants;
-import com.example.healthymind.util.DialogUtils;
-import com.example.healthymind.util.MySharedPreferences;
 
 public class MainActivity extends BaseActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {

@@ -4,6 +4,10 @@ package com.example.healthymind.ui.navigation;
 import android.app.Activity;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.widget.Toolbar;
@@ -14,10 +18,11 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.view.LayoutInflater;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
+import com.example.healthymind.R;
+import com.example.healthymind.entity.DrawerBean;
+import com.example.healthymind.listener.OnRecyclerViewItemClick;
+import com.example.healthymind.util.UserPreferences;
+import com.example.healthymind.util.ValueConstants;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,12 +30,6 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
-
-import com.example.healthymind.R;
-import com.example.healthymind.entity.DrawerBean;
-import com.example.healthymind.listener.OnRecyclerViewItemClick;
-import com.example.healthymind.util.UserPreferences;
-import com.example.healthymind.util.ValueConstants;
 
 public class NavigationDrawerFragment extends Fragment implements OnRecyclerViewItemClick<DrawerBean> {
 

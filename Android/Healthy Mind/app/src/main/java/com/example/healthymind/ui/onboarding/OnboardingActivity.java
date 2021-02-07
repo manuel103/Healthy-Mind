@@ -1,14 +1,5 @@
 package com.example.healthymind.ui.onboarding;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.viewpager.widget.ViewPager;
-
-import android.os.Bundle;
-
-import com.example.healthymind.R;
-import com.example.healthymind.ui.MainActivity;
-import com.google.android.material.tabs.TabLayout;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -19,6 +10,13 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager.widget.ViewPager;
+
+import com.example.healthymind.R;
+import com.example.healthymind.ui.MainActivity;
+import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
 import java.util.List;
