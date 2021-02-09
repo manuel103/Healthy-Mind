@@ -23,7 +23,7 @@ class MatxSearchBox extends Component {
       <React.Fragment>
         {!this.state.open && (
           <IconButton onClick={this.toggle}>
-            <Icon style={{ color: "#fff !important;" }}>search</Icon>
+            {/* <Icon style={{ color: "#fff !important;" }}>search</Icon> */}
           </IconButton>
         )}
 
